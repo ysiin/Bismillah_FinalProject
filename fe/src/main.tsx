@@ -5,6 +5,8 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import Home from "./page/home.tsx";
 import Header from "./components/header/index.tsx";
 import BorrowBook from "./page/borrow-book.tsx";
+import Login from "./page/login.tsx";
+import SignUp from "./page/SignUp.tsx";
 
 let router = createBrowserRouter([
   {
@@ -18,9 +20,17 @@ let router = createBrowserRouter([
       {
         path: "/borrow-book",
         Component: BorrowBook,
-      },
+      }      
     ],
   },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/signup",
+        Component: SignUp,
+      }
 ]);
 function MainLayout() {
   return (
