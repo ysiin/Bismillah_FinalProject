@@ -24,11 +24,18 @@ export default function Home() {
           hideDetail ? "flex flex-col" : "flex flex-row"
         } overflow-y-auto bg-[#EAEFF4] h-[88.3%]`}
       >
-        <div className="overflow-y-auto">
+        <div
+          className="overflow-y-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
           <div
-            className={`flex flex-col gap-10 bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5 ${
+            className={`flex flex-col gap-5 bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5 ${
               hideDetail ? "w-auto" : "w-fit"
             }`}
+            style={showAll ? { height: "700px" } : { height: "" }}
           >
             <div className="flex flex-row justify-between">
               <h1 className="text-3xl font-semibold text-accent-50">
@@ -48,11 +55,16 @@ export default function Home() {
               </div>
             </div>
             <div
-              className={`${
+              className={`pt-5 ${
                 hideDetail
                   ? "flex flex-wrap justify-center"
                   : "grid grid-cols-5"
-              } gap-5 w-fit`}
+              } gap-5 w-full overflow-y-auto pr-2`}
+              style={{
+                maxHeight: "600px",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
             >
               {booksToShow.map((item, index) => (
                 <div

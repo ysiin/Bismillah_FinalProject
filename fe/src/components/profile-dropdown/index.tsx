@@ -8,7 +8,7 @@ export default function ProfileDropdown() {
   return (
     <>
       <div
-        className="flex items-center gap-2 border border-red-500"
+        className="flex items-center gap-2 pb-2"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
@@ -18,7 +18,11 @@ export default function ProfileDropdown() {
       </div>
 
       {open && (
-        <div className="absolute right-2 top-26 mt-2 w-60 border border-gray-700 rounded-md bg-gray-50 shadow-lg flex flex-col gap-4 p-4 z-10">
+        <div
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+          className="absolute right-2 top-26  w-60 border border-gray-700 rounded-md bg-gray-50 shadow-lg flex flex-col gap-4 p-4 z-10"
+        >
           <div className="flex flex-col gap-1 items-center">
             <UserIcon height={40} width={40} className="" />
             <p className="text-center font-semibold">Guest</p>
