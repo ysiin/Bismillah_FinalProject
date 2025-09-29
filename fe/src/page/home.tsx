@@ -1,6 +1,7 @@
 import DetailBookPage from "@/components/home/detail-book";
 import HeaderPage from "@/components/home/header";
 import { dummy } from "@/dummy";
+import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
@@ -33,12 +34,18 @@ export default function Home() {
               <h1 className="text-3xl font-semibold text-accent-50">
                 Recommended
               </h1>
-              <span
+              <div
                 className="bg-sky-200 flex cursor-pointer items-center px-2.5 rounded-lg text-sky-700"
                 onClick={() => setShowAll(!showAll)}
               >
-                {showAll ? "Hide" : "See All >"}
-              </span>
+                {showAll ? (
+                  <span>Hide</span>
+                ) : (
+                  <span className="flex flex-row items-center">
+                    See All <ChevronRight size={15} className="ml-1" />
+                  </span>
+                )}
+              </div>
             </div>
             <div
               className={`${
