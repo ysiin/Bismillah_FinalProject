@@ -25,7 +25,11 @@ export default function Home() {
                     className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
                   >
                     <div className="border border-red-500 w-[200px] h-[305px] rounded-lg">
-                      {item.imgBook}
+                      <img
+                        src={item.imgBook}
+                        alt={item.nameBook}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <p>{item.nameBook}</p>
@@ -38,7 +42,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-10  bg-white rounded-2xl ml-8 mt-10 px-3.5 py-5 w-fit">
             <div className="flex flex-row justify-between">
-              <h1 className="text-3xl font-bold">Reccomended</h1>
+              <h1 className="text-3xl font-bold">Category</h1>
               <span className="bg-sky-200 flex cursor-pointer items-center px-2.5 rounded-lg text-sky-700">
                 See All {">"}
               </span>

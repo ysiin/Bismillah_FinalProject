@@ -13,8 +13,8 @@ type DummyType = {
 
 export const dummy: DummyType[] = [
   {
-    nameBook: "Contoh Judul",
-    writer: "Nama Penulis",
+    nameBook: "Teruslah Bodoh Jangan Pintar",
+    writer: "Tere Liye",
     ratting: 4.5,
     pages: 320,
     star: 5,
@@ -22,11 +22,24 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/TeruslahBodohJanganPintar.jpg",
   },
   {
-    nameBook: "Contoh Judul",
-    writer: "Nama Penulis",
+    nameBook: "Untukmu, Anak Bungsu",
+    writer: "Hidya Hanin",
+    ratting: 4.5,
+    pages: 320,
+    star: 5,
+    riviews: "Buku yang sangat menarik!",
+    amountRiviews: 120,
+    aboutBook: "Deskripsi singkat tentang buku ini...",
+    category: "Novel",
+    imgBook: "/src/assets/UntukmuAnakBungsu.jpg",
+  },
+
+  {
+    nameBook: "Hidup Ini Terlalu Banyak Kamu",
+    writer: "Pidi Baiq",
     ratting: 4.5,
     pages: 320,
     star: 5,
@@ -38,21 +51,8 @@ export const dummy: DummyType[] = [
   },
 
   {
-    nameBook: "Contoh Judul",
-    writer: "Nama Penulis",
-    ratting: 4.5,
-    pages: 320,
-    star: 5,
-    riviews: "Buku yang sangat menarik!",
-    amountRiviews: 120,
-    aboutBook: "Deskripsi singkat tentang buku ini...",
-    category: "Novel",
-    imgBook: "/path/to/image.jpg",
-  },
-
-  {
-    nameBook: "Contoh Judul",
-    writer: "Nama Penulis",
+    nameBook: "Ternyata Tanpamu...",
+    writer: "Natasha Rizky",
     ratting: 4.5,
     pages: 320,
     star: 5,
@@ -63,8 +63,8 @@ export const dummy: DummyType[] = [
     imgBook: "/path/to/image.jpg",
   },
   {
-    nameBook: "Contoh Judul",
-    writer: "Nama Penulis",
+    nameBook: "Laut Bercerita",
+    writer: "Leila S. Chudori",
     ratting: 4.5,
     pages: 320,
     star: 5,

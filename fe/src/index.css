@@ -59,6 +59,8 @@
   --color-gray-900: #0f1011;
 
   --color-accent-50: #001743;
+  --color-button: #0054FE;
+  --color-button-hover: #003BB3;
 }
 
 @theme inline {
