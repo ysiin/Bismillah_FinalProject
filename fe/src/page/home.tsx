@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function Home() {
   const [showAll, setShowAll] = useState(false);
   const [hideDetail, setHideDetail] = useState(true);
+  const [indexBook, setIndexBook] = useState<number>(0);
 
   const booksToShow = showAll
     ? dummy
@@ -32,7 +33,7 @@ export default function Home() {
           }}
         >
           <div
-            className={`flex flex-col gap-5 bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5 ${
+            className={`flex flex-col gap-5 bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5  ${
               hideDetail ? "w-auto" : "w-fit"
             }`}
             style={showAll ? { height: "700px" } : { height: "" }}
@@ -59,38 +60,44 @@ export default function Home() {
                 hideDetail
                   ? "flex flex-wrap justify-center"
                   : "grid grid-cols-5"
-              } gap-5 w-full overflow-y-auto pr-2`}
+              } gap-5 w-full overflow-y-auto py-1 px-1 `}
               style={{
                 maxHeight: "600px",
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
-              {booksToShow.map((item, index) => (
-                <div
-                  key={index}
-                  className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
-                  onClick={() => setHideDetail(false)}
-                >
-                  <div className="w-[200px] h-[305px] rounded-lg">
-                    <img
-                      src={item.imgBook}
-                      alt={item.nameBook}
-                      className="w-full h-full rounded-lg"
-                    />
+              {booksToShow.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105"
+                    onClick={() => {
+                      setHideDetail(false);
+                      setIndexBook(index);
+                      console.log(index);
+                    }}
+                  >
+                    <div className="w-[200px] h-[305px] rounded-lg">
+                      <img
+                        src={item.imgBook}
+                        alt={item.nameBook}
+                        className="w-full h-full rounded-lg"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="text-lg font-semibold">{item.nameBook} </p>
+                      <p className="text-gray-300">{item.writer}</p>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <p className="text-lg font-semibold">{item.nameBook}</p>
-                    <p className="text-gray-300">{item.writer}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
         {!hideDetail && (
           <div className="flex-1 h-full bg-[#001743] rounded-lg">
-            <DetailBookPage setHideDetail={setHideDetail} />
+            <DetailBookPage setHideDetail={setHideDetail} index={indexBook} />
           </div>
         )}
       </div>
