@@ -20,7 +20,7 @@ export default function AuthPasswordInput({
         <button
           type="button"
           onClick={() => setShow((prev) => !prev)}
-          className="text-sm text-gray-200 hover:underline flex items-center gap-1"
+          className="text-sm text-gray-200 hover:underline flex items-center gap-1 cursor-pointer"
         >
           {show ? (
             <>
