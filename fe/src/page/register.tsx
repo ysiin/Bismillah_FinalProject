@@ -5,10 +5,10 @@ import AuthInput from "@/components/ui/authInput";
 import AuthPasswordInput from "@/components/ui/passwordInput";
 import { ArrowBigLeft } from "lucide-react";
 
-export default function Login() {
+export default function Register() {
   return (
     <>
-      <Link to="/">
+      <Link to="/login">
         <div className="bg-accent-50 w-12 h-12 flex justify-center items-center rounded-4xl">
           <ArrowBigLeft
             width={30}
@@ -18,12 +18,13 @@ export default function Login() {
         </div>
       </Link>
       <div className="flex justify-center">
-        <Link to="/" className="text-center mt-20 text-3xl">
+        <div className="text-center mt-20 text-3xl">
           <span className="font-bold">Book</span>Base
-        </Link>
+        </div>
       </div>
-      <AuthCard title="Login">
-        <AuthInput label="Username or Email" type="text" />
+      <AuthCard title="Sign Up">
+        <AuthInput label="Username" type="text" />
+        <AuthInput label="Email" type="text" />
         <AuthPasswordInput label="Password" type="password" />
       </AuthCard>
     </>

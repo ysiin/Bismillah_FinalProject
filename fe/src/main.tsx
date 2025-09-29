@@ -6,7 +6,9 @@ import Home from "./page/home.tsx";
 import Header from "./components/header/index.tsx";
 import BorrowBook from "./page/borrow-book.tsx";
 import Login from "./page/login.tsx";
-import SignUp from "./page/SignUp.tsx";
+import Register from "./page/register.tsx";
+import Category from "./page/category.tsx";
+import ListBook from "./page/list-booking.tsx";
 
 let router = createBrowserRouter([
   {
@@ -20,17 +22,25 @@ let router = createBrowserRouter([
       {
         path: "/borrow-book",
         Component: BorrowBook,
-      }      
-    ],
-  },
-      {
-        path: "/login",
-        Component: Login,
       },
       {
-        path: "/signup",
-        Component: SignUp,
-      }
+        path: "/category",
+        Component: Category,
+      },
+      {
+        path: "/list-booking",
+        Component: ListBook,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/register",
+    Component: Register,
+  },
 ]);
 function MainLayout() {
   return (

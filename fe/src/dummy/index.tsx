@@ -22,7 +22,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img1.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -34,20 +34,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
-  },
-
-  {
-    nameBook: "Contoh Judul",
-    writer: "Nama Penulis",
-    ratting: 4.5,
-    pages: 320,
-    star: 5,
-    riviews: "Buku yang sangat menarik!",
-    amountRiviews: 120,
-    aboutBook: "Deskripsi singkat tentang buku ini...",
-    category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img1.jpg",
   },
 
   {
@@ -60,7 +47,20 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img1.jpg",
+  },
+
+  {
+    nameBook: "Contoh Judul",
+    writer: "Nama Penulis",
+    ratting: 4.5,
+    pages: 320,
+    star: 5,
+    riviews: "Buku yang sangat menarik!",
+    amountRiviews: 120,
+    aboutBook: "Deskripsi singkat tentang buku ini...",
+    category: "Novel",
+    imgBook: "/src/assets/img1.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -72,7 +72,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img1.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -84,7 +84,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img1.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -96,7 +96,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img1.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -108,7 +108,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img2.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -120,7 +120,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img2.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -132,7 +132,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img2.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -144,7 +144,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img2.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -156,7 +156,7 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img2.jpg",
   },
   {
     nameBook: "Contoh Judul",
@@ -168,6 +168,6 @@ export const dummy: DummyType[] = [
     amountRiviews: 120,
     aboutBook: "Deskripsi singkat tentang buku ini...",
     category: "Novel",
-    imgBook: "/path/to/image.jpg",
+    imgBook: "/src/assets/img2.jpg",
   },
 ];
