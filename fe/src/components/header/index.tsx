@@ -19,7 +19,7 @@ export default function Header() {
                 <div className="bg-[#0C56F2] rounded-2xl p-2">
                   <HouseIcon className="text-white" />
                 </div>
-                <li className="text-accent-50 font-semibold">Beranda</li>
+                <li className="text-accent-50 font-semibold">Discover</li>
               </div>
             ) : (
               <div className="flex flex-row px-4 py-2 items-center gap-2.5">
