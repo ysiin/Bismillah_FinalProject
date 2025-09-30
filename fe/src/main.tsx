@@ -51,8 +51,8 @@ function MainLayout() {
       </header>
       <main className="flex-1">
         <Outlet />
+        <Toaster richColors position="top-right" />
       </main>
-      <Toaster />
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
+
 import AuthPasswordInput from "@/components/ui/passwordInput";
 import { ArrowBigLeft } from "lucide-react";
 
@@ -32,7 +34,15 @@ export default function Login() {
 
     if (user) {
       localStorage.setItem("loggedInUser", JSON.stringify(user));
-      alert("Login sukses!");
+      alert("Login berhasil!");
+      toast("Login berhasil!", {
+        description: `Selamat datang ${user.username}`,
+        action: {
+          label: "OK",
+          onClick: () => console.log("User acknowledged"),
+        },
+      });
+
       navigate("/");
     } else {
       alert("Username atau password salah!");
