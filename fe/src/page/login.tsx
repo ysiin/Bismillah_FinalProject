@@ -34,7 +34,7 @@ export default function Login() {
 
     if (user) {
       localStorage.setItem("loggedInUser", JSON.stringify(user)); // simpan user yang login
-      alert("Login sukses!");
+      // alert("Login sukses!");
       navigate("/"); // redirect ke home
     } else {
       alert("Username atau password salah!");
