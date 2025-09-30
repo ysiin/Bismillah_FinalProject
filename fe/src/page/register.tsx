@@ -17,17 +17,17 @@ export default function Register() {
     const accounts = JSON.parse(localStorage.getItem("accounts") || "[]");
 
     // cek username sudah ada atau belum
-    // if (accounts.some((u: any) => u.username === username)) {
-    //   alert("Username sudah dipakai!");
-    //   return;
-    // }
+    if (accounts.some((u: any) => u.username === username)) {
+      alert("Username sudah dipakai!");
+      return;
+    }
 
     // tambahkan akun baru
     accounts.push({ username, email, password });
     localStorage.setItem("accounts", JSON.stringify(accounts));
 
     alert("Register berhasil, silakan login!");
-    navigate("/login"); 
+    navigate("/login");
   };
 
   return (
