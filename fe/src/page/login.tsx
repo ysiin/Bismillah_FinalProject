@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
+
 import AuthPasswordInput from "@/components/ui/passwordInput";
 import { ArrowBigLeft } from "lucide-react";
 
@@ -11,13 +13,11 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // dummy akun
   const account = [
     { username: "suri", password: "1234" },
     { username: "john", password: "5678" },
   ];
 
-  // simpan dummy akun ke localStorage saat pertama kali load
   useEffect(() => {
     if (!localStorage.getItem("accounts")) {
       localStorage.setItem("accounts", JSON.stringify(account));
@@ -33,9 +33,17 @@ export default function Login() {
     );
 
     if (user) {
-      localStorage.setItem("loggedInUser", JSON.stringify(user)); // simpan user yang login
-      // alert("Login sukses!");
-      navigate("/"); // redirect ke home
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      alert("Login berhasil!");
+      toast("Login berhasil!", {
+        description: `Selamat datang ${user.username}`,
+        action: {
+          label: "OK",
+          onClick: () => console.log("User acknowledged"),
+        },
+      });
+
+      navigate("/");
     } else {
       alert("Username atau password salah!");
     }
