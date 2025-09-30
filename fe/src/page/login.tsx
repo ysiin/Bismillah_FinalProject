@@ -11,13 +11,11 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // dummy akun
   const account = [
     { username: "suri", password: "1234" },
     { username: "john", password: "5678" },
   ];
 
-  // simpan dummy akun ke localStorage saat pertama kali load
   useEffect(() => {
     if (!localStorage.getItem("accounts")) {
       localStorage.setItem("accounts", JSON.stringify(account));
@@ -33,9 +31,9 @@ export default function Login() {
     );
 
     if (user) {
-      localStorage.setItem("loggedInUser", JSON.stringify(user)); // simpan user yang login
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
       alert("Login sukses!");
-      navigate("/"); // redirect ke home
+      navigate("/");
     } else {
       alert("Username atau password salah!");
     }

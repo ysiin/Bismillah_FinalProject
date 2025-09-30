@@ -9,6 +9,7 @@ import Login from "./page/login.tsx";
 import Register from "./page/register.tsx";
 import Category from "./page/category.tsx";
 import ListBook from "./page/list-booking.tsx";
+import { Toaster } from "./components/ui/toaster.tsx";
 
 let router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ function MainLayout() {
       <main className="flex-1">
         <Outlet />
       </main>
+      <Toaster />
     </div>
   );
 }
