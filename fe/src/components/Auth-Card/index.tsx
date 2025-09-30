@@ -1,7 +1,7 @@
 import AuthButton from "../ui/authButton";
 import { Link } from "react-router";
 interface AuthCardProps {
-  title: "Login" | "Sign Up";
+  title: "Login" | "Register";
   children?: React.ReactNode;
   onSubmit?: () => void;
 }
@@ -23,7 +23,7 @@ export default function AuthCard({ title, children, onSubmit }: AuthCardProps) {
         <p className="text-sm text-center pt-4">
           Belum Memiliki Akun?{" "}
           <Link to="/register" className="text-blue-500">
-            Sign Up
+            Register
           </Link>
         </p>
       ) : (

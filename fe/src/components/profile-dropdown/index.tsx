@@ -2,7 +2,8 @@ import { Link } from "react-router";
 import { useEffect } from "react";
 import { ChevronDown, ChevronUpIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
-import Pfp from "../ui/loggedIn";
+
+import Pfp from "../ui/loggedInPfp";
 
 export default function ProfileDropdown() {
   const [open, setOpen] = useState(false);
