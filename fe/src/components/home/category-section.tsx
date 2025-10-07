@@ -1,65 +1,56 @@
-import { ChevronRight } from "lucide-react";
 import Img1 from "@/assets/img1.jpg";
 import type { Book } from "@/page/home";
 
 interface RecommendedSectionProps {
   booksToDisplay: Book[];
-  searchQuery: string;
-  showAll: boolean;
-  setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
   hideDetail: boolean;
   setHideDetail: React.Dispatch<React.SetStateAction<boolean>>;
   setIndexBook: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export default function RecommendedSection({
+const category: string[] = [
+  "All",
+  "Fiksi",
+  "Teknologi",
+  "Sejarah",
+  "Education",
+  "Busisness",
+];
+
+export default function CategorySection({
   booksToDisplay,
-  searchQuery,
-  showAll,
-  setShowAll,
   hideDetail,
   setHideDetail,
   setIndexBook,
 }: RecommendedSectionProps) {
   return (
-    <div
-      className="overflow-y-auto h-full"
-      style={{
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
-    >
+    <>
       <div
-        className={`flex flex-col gap-5 max-h-full bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5  ${
+        className={`flex flex-col gap-5 max-h-full bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5 ${
           hideDetail ? "w-auto " : "w-fit"
         }`}
-        style={showAll ? { height: "700px" } : {}}
+        style={{ height: "700px" }}
       >
         <div className="flex flex-row justify-between items-center">
-          <h1 className="text-3xl font-semibold text-accent-50">
-            {searchQuery ? "Search Results" : "Recommended"}
-          </h1>
-          {!searchQuery && (
-            <span
-              className="bg-sky-200 flex cursor-pointer items-center px-2.5 rounded-lg text-sky-700"
-              onClick={() => setShowAll(!showAll)}
-            >
-              {showAll ? (
-                "Hide"
-              ) : (
-                <span className="flex items-center">
-                  See All <ChevronRight size={15} className="ml-1" />
-                </span>
-              )}
-            </span>
-          )}
+          <h1 className="text-3xl font-semibold text-accent-50">Category</h1>
         </div>
-
+        <div>
+          <ul className="flex flex-row gap-5">
+            {category.map((item, index) => (
+              <li
+                className="border border-red-700 p-1.5 rounded-lg"
+                key={index}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="flex justify-center">
           <div
             className={`pt-5 ${
-              hideDetail ? "flex flex-wrap" : "grid grid-cols-5"
-            } gap-5 w-full overflow-y-auto py-1 px-1`}
+              hideDetail ? "w-[1350px]" : "w-[1100px]"
+            } gap-5 flex flex-row overflow-x-auto py-1 px-1 justify-between`}
             style={{
               maxHeight: "600px",
               scrollbarWidth: "none",
@@ -99,6 +90,6 @@ export default function RecommendedSection({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
