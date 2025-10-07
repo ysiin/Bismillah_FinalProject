@@ -1,7 +1,8 @@
 import { getBooks } from "@/axios/api";
+import CategorySection from "@/components/home/category-section";
 import DetailBookPage from "@/components/home/detail-book";
 import HeaderPage from "@/components/home/header";
-import RecommendedSection from "@/components/home/recommended";
+import RecommendedSection from "@/components/home/recommended-section";
 import { useEffect, useState } from "react";
 
 export interface Book {
@@ -12,7 +13,7 @@ export interface Book {
   isbn: string;
   publisher: string;
   year_published: number;
-  category_id: number;
+  category: string;
   total_copies: number;
   available_copies: number;
   total_pages: number;
@@ -32,7 +33,7 @@ export default function Home() {
       .then((data) => setBooks(data))
       .catch((err) => console.error(err));
   }, []);
-
+  console.log(books, "data");
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query) {
@@ -45,13 +46,15 @@ export default function Home() {
     }
   };
 
-  const booksToShow = showAll
+  const recommendedBooks = showAll
     ? books
     : hideDetail
     ? books.slice(0, 6)
     : books.slice(0, 5);
 
-  const booksToDisplay = searchQuery ? filteredBooks : booksToShow;
+  const categoryBooks = books;
+
+  const booksToDisplay = searchQuery ? filteredBooks : recommendedBooks;
 
   return (
     <>
@@ -68,21 +71,34 @@ export default function Home() {
           msOverflowStyle: "none",
         }}
       >
-        <RecommendedSection
-          booksToDisplay={booksToDisplay}
-          searchQuery={searchQuery}
-          showAll={showAll}
-          setShowAll={setShowAll}
-          hideDetail={hideDetail}
-          setHideDetail={setHideDetail}
-          setIndexBook={setIndexBook}
-        />
-
+        <div
+          className="flex flex-col overflow-y-auto h-full"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          <RecommendedSection
+            booksToDisplay={booksToDisplay}
+            searchQuery={searchQuery}
+            showAll={showAll}
+            setShowAll={setShowAll}
+            hideDetail={hideDetail}
+            setHideDetail={setHideDetail}
+            setIndexBook={setIndexBook}
+          />
+          <CategorySection
+            booksToDisplay={categoryBooks}
+            hideDetail={hideDetail}
+            setHideDetail={setHideDetail}
+            setIndexBook={setIndexBook}
+          />
+        </div>
         {!hideDetail && indexBook && (
           <div
             className={`flex-1 h-full  ${
               !searchQuery ? "max-w-[250px]" : "max-w-full"
-            }  bg-[#001743] rounded-lg p-5`}
+            }  bg-[#001743] rounded-bl-lg rounded-tl-lg p-5`}
           >
             <DetailBookPage setHideDetail={setHideDetail} id={indexBook} />
           </div>
