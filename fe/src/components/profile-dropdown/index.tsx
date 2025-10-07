@@ -19,13 +19,14 @@ export default function ProfileDropdown() {
   return (
     <>
       <div
-        className="flex items-center gap-2 pb-2"
+        className="flex items-center gap-10 pb-2 cursor-pointer"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
-        {!account ? <UserIcon /> : <Pfp />}
-
-        <p>{account?.username ?? "Guest"}</p>
+        <div className="flex flex-row gap-2 items-center ">
+          {!account ? <UserIcon /> : <Pfp />}
+          <p>{account?.username ?? "Guest"}</p>
+        </div>
         {open ? <ChevronUpIcon /> : <ChevronDown />}
       </div>
 

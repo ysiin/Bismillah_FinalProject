@@ -1,5 +1,7 @@
 import Img1 from "@/assets/img1.jpg";
+import { getCategories } from "@/axios/api";
 import type { Book } from "@/page/home";
+import { useEffect, useState } from "react";
 
 interface RecommendedSectionProps {
   booksToDisplay: Book[];
@@ -7,22 +9,30 @@ interface RecommendedSectionProps {
   setHideDetail: React.Dispatch<React.SetStateAction<boolean>>;
   setIndexBook: React.Dispatch<React.SetStateAction<number | null>>;
 }
-
-const category: string[] = [
-  "All",
-  "Fiksi",
-  "Teknologi",
-  "Sejarah",
-  "Education",
-  "Busisness",
-];
-
+interface Category {
+  id: number;
+  name: string;
+}
 export default function CategorySection({
   booksToDisplay,
   hideDetail,
   setHideDetail,
   setIndexBook,
 }: RecommendedSectionProps) {
+  const [categoriesBooks, setCategoriesBooks] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
+  useEffect(() => {
+    getCategories()
+      .then((data) => setCategoriesBooks(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const filteredBooks =
+    selectedCategory === null
+      ? booksToDisplay
+      : booksToDisplay.filter((book) => book.category_id === selectedCategory);
+
   return (
     <>
       <div
@@ -36,12 +46,27 @@ export default function CategorySection({
         </div>
         <div>
           <ul className="flex flex-row gap-5">
-            {category.map((item, index) => (
+            <li
+              className={`${
+                selectedCategory == null
+                  ? "bg-[#0054FD] text-white"
+                  : "bg-[#E6F2FF]"
+              } py-1.5 px-2.5 rounded-lg cursor-pointer`}
+              onClick={() => setSelectedCategory(null)}
+            >
+              All
+            </li>
+            {categoriesBooks.map((item, index) => (
               <li
-                className="border border-red-700 p-1.5 rounded-lg"
+                className={`${
+                  selectedCategory == item?.id
+                    ? "bg-[#0054FD] text-white"
+                    : "bg-[#E6F2FF]"
+                } py-1.5 px-2.5  rounded-lg cursor-pointer`}
                 key={index}
+                onClick={() => setSelectedCategory(item?.id)}
               >
-                {item}
+                {item?.name}
               </li>
             ))}
           </ul>
@@ -50,15 +75,15 @@ export default function CategorySection({
           <div
             className={`pt-5 ${
               hideDetail ? "w-[1350px]" : "w-[1100px]"
-            } gap-5 flex flex-row overflow-x-auto py-1 px-1 justify-between`}
+            } gap-5 flex flex-row overflow-x-auto py-1 px-1`}
             style={{
               maxHeight: "600px",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
           >
-            {booksToDisplay.length > 0 ? (
-              booksToDisplay.map((book) => (
+            {filteredBooks.length > 0 ? (
+              filteredBooks.map((book) => (
                 <div
                   key={book.id}
                   className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"
