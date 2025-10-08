@@ -9,7 +9,7 @@ interface RecommendedSectionProps {
   setHideDetail: React.Dispatch<React.SetStateAction<boolean>>;
   setIndexBook: React.Dispatch<React.SetStateAction<number | null>>;
 }
-interface Category {
+export interface Category {
   id: number;
   name: string;
 }

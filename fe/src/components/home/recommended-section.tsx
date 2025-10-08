@@ -80,7 +80,6 @@ export default function RecommendedSection({
                   <div className="flex flex-col">
                     <p className="text-lg font-semibold">{book.title}</p>
                     <p className="text-gray-300">{book.author}</p>
-                    <p className="text-gray-300">{book.category}</p>
                   </div>
                 </div>
               ))
