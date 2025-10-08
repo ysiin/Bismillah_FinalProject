@@ -1,9 +1,9 @@
 import { getBooks } from "@/axios/api";
 import CategorySection from "@/components/home/category-section";
 import DetailBookPage from "@/components/home/detail-book";
-import HeaderPage from "@/components/home/header";
 import RecommendedSection from "@/components/home/recommended-section";
 import { useEffect, useState } from "react";
+import HeaderSection from "@/components/header-section";
 
 export interface Book {
   id: number;
@@ -13,7 +13,7 @@ export interface Book {
   isbn: string;
   publisher: string;
   year_published: number;
-  category: string;
+  category_id: number;
   total_copies: number;
   available_copies: number;
   total_pages: number;
@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <>
       <header className="w-full h-28">
-        <HeaderPage handleSearch={handleSearch} searchQuery={searchQuery} />
+        <HeaderSection handleSearch={handleSearch} searchQuery={searchQuery} />
       </header>
 
       <div
