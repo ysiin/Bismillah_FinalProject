@@ -15,7 +15,7 @@ export default function Category() {
   const [books, setBooks] = useState<Book[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTitle, setSelectedTitle] = useState("");
+  const [selectedYears, setSelectedYears] = useState("");
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
   const [isFilterApplied, setIsFilterApplied] = useState(false);
 
@@ -34,7 +34,6 @@ export default function Category() {
     };
     fetchData();
   }, []);
-
   const categoryMap = useMemo(() => {
     return categories.reduce((map, category) => {
       map[category.id] = category.name;
@@ -57,8 +56,10 @@ export default function Category() {
     }
 
     if (isFilterApplied) {
-      if (selectedTitle) {
-        tempBooks = tempBooks.filter((book) => book.title === selectedTitle);
+      if (selectedYears) {
+        tempBooks = tempBooks.filter(
+          (book) => String(book.year_published) === selectedYears
+        );
       }
       if (selectedCategoryName) {
         const categoryId = categories.find(
@@ -76,7 +77,7 @@ export default function Category() {
   }, [
     books,
     searchQuery,
-    selectedTitle,
+    selectedYears,
     selectedCategoryName,
     isFilterApplied,
     categories,
@@ -88,7 +89,7 @@ export default function Category() {
   };
 
   const handleResetFilters = () => {
-    setSelectedTitle("");
+    setSelectedYears("");
     setSelectedCategoryName("");
     setIsFilterApplied(false);
   };
@@ -108,9 +109,9 @@ export default function Category() {
           books={books}
           handleSearch={handleSearchChange}
           searchQuery={searchQuery}
-          selectedTitle={selectedTitle}
+          selectedYears={selectedYears}
           selectedCategory={selectedCategoryName}
-          setSelectedTitle={setSelectedTitle}
+          setSelectedYears={setSelectedYears}
           setSelectedCategory={setSelectedCategoryName}
           handleFilter={handleFilterClick}
           handleResetFilters={handleResetFilters}

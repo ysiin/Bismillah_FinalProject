@@ -19,7 +19,7 @@ interface SelectedMenuProps {
 
 export function SelectedMenu({
   placeholder,
-  books,
+  // books,
   onValueChange,
   value,
 }: SelectedMenuProps) {
@@ -38,7 +38,17 @@ export function SelectedMenu({
     fetchData();
   }, []);
 
-  const getTitles = Array.from(new Set(books.map((book) => book.title)));
+  var years = [];
+
+  for (let i = 2025; i >= 2015; i--) {
+    years.push(i?.toString());
+  }
+  console.log(years, "years");
+
+  // const getYears = Array.from(
+  //   new Set(books.map((book) => book.year_published?.toString()))
+  // );
+
   const getCategory = Array.from(
     new Set(categories.map((category) => category.name))
   );
@@ -52,14 +62,14 @@ export function SelectedMenu({
         />
       </SelectTrigger>
       <SelectContent className="bg-[#D4E2FF] shadow shadow-black/30 ">
-        {placeholder === "Title"
-          ? getTitles.map((title, index) => (
+        {placeholder === "Years Published"
+          ? years.map((years, index) => (
               <SelectItem
-                value={title}
+                value={years}
                 key={index}
                 className="hover:bg-[#0054FD] hover:text-white cursor-pointer"
               >
-                {title}
+                {years}
               </SelectItem>
             ))
           : getCategory.map((category, index) => (
