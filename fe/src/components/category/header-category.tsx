@@ -1,11 +1,9 @@
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
-import type { Book } from "@/page/home";
 import { SelectedMenu } from "./selected";
 import { Button } from "../ui/button";
 
 interface HeaderCategoryProps {
-  books: Book[];
   handleSearch: (query: string) => void;
   searchQuery: string;
   selectedYears: string;
@@ -17,7 +15,6 @@ interface HeaderCategoryProps {
 }
 
 export default function HeaderCategory({
-  books,
   handleSearch,
   searchQuery,
   selectedYears,
@@ -44,7 +41,6 @@ export default function HeaderCategory({
           <div className="flex flex-col ">
             <SelectedMenu
               placeholder="Years Published"
-              books={books}
               onValueChange={(value) => setSelectedYears(value.toString())}
               value={selectedYears}
             />
@@ -52,7 +48,6 @@ export default function HeaderCategory({
           <div className="flex flex-col ">
             <SelectedMenu
               placeholder="Category"
-              books={books}
               onValueChange={setSelectedCategory}
               value={selectedCategory}
             />

@@ -8,18 +8,16 @@ import {
 } from "@/components/ui/selected-menu";
 import { useEffect, useState } from "react";
 import type { Category } from "../home/category-section";
-import type { Book } from "@/page/home";
 
 interface SelectedMenuProps {
   placeholder: string;
-  books: Book[];
   onValueChange: (value: string) => void;
   value: string;
 }
 
 export function SelectedMenu({
   placeholder,
-  // books,
+
   onValueChange,
   value,
 }: SelectedMenuProps) {

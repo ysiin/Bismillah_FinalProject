@@ -106,7 +106,6 @@ export default function Category() {
       </header>
       <div className="flex flex-col gap-10 bg-[#EAEFF4] h-[88.3%] p-10">
         <HeaderCategory
-          books={books}
           handleSearch={handleSearchChange}
           searchQuery={searchQuery}
           selectedYears={selectedYears}
