@@ -33,7 +33,7 @@ export default function HeaderCategory({
             <Input
               type="search"
               placeholder="Search By Category Or Author Or Publisher"
-              className="pl-13 bg-[#F0F5FF] shadow shadow-black/30 placeholder:text-center placeholder:text-gray-100"
+              className="pl-13 bg-[#F0F5FF] shadow shadow-black/30 placeholder:text-gray-100"
               onChange={(e) => handleSearch(e.target.value)}
               value={searchQuery}
             />

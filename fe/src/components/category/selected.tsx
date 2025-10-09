@@ -38,7 +38,7 @@ export function SelectedMenu({
 
   var years = [];
 
-  for (let i = 2025; i >= 2015; i--) {
+  for (let i = 2009; i <= 2025; i++) {
     years.push(i?.toString());
   }
   console.log(years, "years");
@@ -56,10 +56,10 @@ export function SelectedMenu({
       <SelectTrigger className="w-[180px] shadow shadow-black/30 bg-[#D4E2FF] cursor-pointer">
         <SelectValue
           placeholder={placeholder}
-          className="text-gray-100 cursor-pointer"
+          className="text-gray-100 cursor-pointer border-none"
         />
       </SelectTrigger>
-      <SelectContent className="bg-[#D4E2FF] shadow shadow-black/30 ">
+      <SelectContent className="bg-[#D4E2FF] shadow shadow-black/30 max-h-72 border-red-500 h-100px">
         {placeholder === "Years Published"
           ? years.map((years, index) => (
               <SelectItem
