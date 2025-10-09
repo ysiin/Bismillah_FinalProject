@@ -10,6 +10,7 @@ import Register from "./page/register.tsx";
 import Category from "./page/category.tsx";
 import ListBook from "./page/list-booking.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
+import DetailBookPage from "./page/details-book.tsx";
 
 let router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ let router = createBrowserRouter([
       {
         path: "/list-booking",
         Component: ListBook,
+      },
+      {
+        path: "/details/book/:id",
+        Component: DetailBookPage,
       },
     ],
   },

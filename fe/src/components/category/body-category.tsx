@@ -1,12 +1,12 @@
 import type { Book } from "@/page/home";
 import Img1 from "@/assets/img1.jpg";
+import { Link } from "react-router";
 
 interface BodyCategoryProps {
   books: Book[];
 }
 
 export default function BodyCategory({ books }: BodyCategoryProps) {
-  console.log(books, "body category");
   return (
     <div>
       <div className="flex justify-center">
@@ -20,22 +20,21 @@ export default function BodyCategory({ books }: BodyCategoryProps) {
         >
           {books.length > 0 ? (
             books.map((book) => (
-              <div
-                key={book.id}
-                className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"
-              >
-                <div className="w-[200px] h-[305px] rounded-lg">
-                  <img
-                    src={Img1}
-                    alt={book.title}
-                    className="w-full h-full rounded-lg"
-                  />
+              <Link to={`/details/book/${book.id}`} key={book.id}>
+                <div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]">
+                  <div className="w-[200px] h-[305px] rounded-lg">
+                    <img
+                      src={Img1}
+                      alt={book.title}
+                      className="w-full h-full rounded-lg"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-lg font-semibold">{book.title}</p>
+                    <p className="text-gray-300">{book.author}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-lg font-semibold">{book.title}</p>
-                  <p className="text-gray-300">{book.author}</p>
-                </div>
-              </div>
+              </Link>
             ))
           ) : (
             <div className="w-full text-center">
