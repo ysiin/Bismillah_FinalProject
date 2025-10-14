@@ -1,0 +1,67 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Library API",
+        "description": "API documentation for Library system",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local API server"
+        }
+    ],
+    "paths": {
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "List all categories",
+                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create a new category",
+                "operationId": "cca49a87d9b0ebb9a98ad7c154b71737",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Novel"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category created successfully"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Category",
+            "description": "API untuk mengelola kategori buku"
+        }
+    ]
+}

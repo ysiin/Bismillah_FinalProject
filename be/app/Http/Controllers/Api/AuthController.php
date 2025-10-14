@@ -25,23 +25,29 @@ class AuthController extends Controller
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
-                'role' => $validated['role'] ?? 'anggota'
+                'role' => $validated['role'] ?? 'anggota',
             ]);
 
             $token = $user->createToken('api_token')->plainTextToken;
 
             return response()->json([
-                'status' => true,
-                'message' => 'Register berhasil',
+                'success' => true,
+                'message' => 'Registration successful',
                 'user' => $user,
                 'token' => $token
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
-                'status' => false,
-                'message' => 'Validasi gagal',
+                'success' => false,
+                'message' => 'Validation failed',
                 'errors' => $e->errors()
             ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred on the server',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -57,16 +63,16 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return response()->json([
-                'status' => false,
-                'message' => 'Email atau password salah'
+                'success' => false,
+                'message' => 'Invalid email or password'
             ], 401);
         }
 
         $token = $user->createToken('api_token')->plainTextToken;
 
         return response()->json([
-            'status' => true,
-            'message' => 'Login berhasil',
+            'success' => true,
+            'message' => 'Login successful',
             'user' => $user,
             'token' => $token
         ]);
@@ -75,11 +81,11 @@ class AuthController extends Controller
     // 🔹 LOGOUT
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'status' => true,
-            'message' => 'Logout berhasil'
+            'success' => true,
+            'message' => 'Logout successful'
         ]);
     }
 }

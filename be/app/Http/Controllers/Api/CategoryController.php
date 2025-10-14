@@ -8,11 +8,28 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
+
+/**
+ * @OA\Tag(
+ *     name="Category",
+ *     description="API untuk mengelola kategori buku"
+ * )
+ */
+
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/categories",
+     *     tags={"Category"},
+     *   summary="List all categories",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     )
+     * )
      */
+
     public function index()
     {
         try {
@@ -31,7 +48,22 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/categories",
+     *     tags={"Category"},
+     *     summary="Create a new category",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Novel")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Category created successfully"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
