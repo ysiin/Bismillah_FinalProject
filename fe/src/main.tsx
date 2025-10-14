@@ -11,6 +11,7 @@ import Category from "./page/category.tsx";
 import ListBook from "./page/list-booking.tsx";
 import Profile from "./page/profile.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
+import DetailBookPage from "./page/details-book.tsx";
 
 let router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ let router = createBrowserRouter([
       {
         path: "/profile",
         Component: Profile,
+      },
+      {
+        path: "/details/book/:id",
+        Component: DetailBookPage,
       },
     ],
   },

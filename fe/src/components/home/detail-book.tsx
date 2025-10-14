@@ -9,7 +9,7 @@ interface DetailBookPageProps {
   id: string | number;
 }
 
-export default function DetailBookPage({
+export default function DetailBookHome({
   setHideDetail,
   id,
 }: DetailBookPageProps) {

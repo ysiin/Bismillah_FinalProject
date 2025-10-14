@@ -18,3 +18,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::apiResource('books', BookController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('borrows', BorrowController::class);
+
+

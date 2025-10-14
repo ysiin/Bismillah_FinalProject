@@ -5,7 +5,6 @@ import { useEffect, useState, useMemo } from "react";
 import type { Book } from "./home";
 import BodyCategory from "@/components/category/body-category";
 
-// Assuming this is the shape of a category object
 interface Category {
   id: number;
   name: string;

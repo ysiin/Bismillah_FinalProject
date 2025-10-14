@@ -4,9 +4,7 @@ import { toast } from "sonner";
 
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
-
 import AuthPasswordInput from "@/components/ui/passwordInput";
-import { ArrowBigLeft } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -50,17 +48,7 @@ export default function Login() {
   };
 
   return (
-    <>
-      <Link to="/">
-        <div className="bg-accent-50 w-12 h-12 flex justify-center items-center rounded-4xl">
-          <ArrowBigLeft
-            width={30}
-            height={30}
-            className="text-white stroke-1"
-          />
-        </div>
-      </Link>
-
+    <div>
       <div className="flex justify-center">
         <Link to="/" className="text-center mt-20 text-3xl">
           <span className="font-bold">Book</span>Base
@@ -81,6 +69,6 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </AuthCard>
-    </>
+    </div>
   );
 }

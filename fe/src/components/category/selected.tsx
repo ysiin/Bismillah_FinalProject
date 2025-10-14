@@ -43,10 +43,6 @@ export function SelectedMenu({
   }
   console.log(years, "years");
 
-  // const getYears = Array.from(
-  //   new Set(books.map((book) => book.year_published?.toString()))
-  // );
-
   const getCategory = Array.from(
     new Set(categories.map((category) => category.name))
   );

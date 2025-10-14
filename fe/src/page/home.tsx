@@ -1,9 +1,10 @@
 import { getBooks } from "@/axios/api";
 import CategorySection from "@/components/home/category-section";
-import DetailBookPage from "@/components/home/detail-book";
+
 import RecommendedSection from "@/components/home/recommended-section";
 import { useEffect, useState } from "react";
 import HeaderSection from "@/components/header-section";
+import DetailBookHome from "@/components/home/detail-book";
 
 export interface Book {
   id: number;
@@ -64,7 +65,7 @@ export default function Home() {
 
       <div
         className={`${
-          hideDetail ? "" : "flex flex-row justify-between"
+          hideDetail ? "" : "flex flex-row justify-between gap-0"
         } overflow-y-auto bg-[#EAEFF4] h-[88.3%]`}
         style={{
           scrollbarWidth: "none",
@@ -72,7 +73,7 @@ export default function Home() {
         }}
       >
         <div
-          className="flex flex-col overflow-y-auto h-full"
+          className="flex flex-col overflow-y-auto h-full p-10 gap-10"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
@@ -100,7 +101,7 @@ export default function Home() {
               !searchQuery ? "max-w-[250px]" : "max-w-full"
             }  bg-[#001743] rounded-bl-lg rounded-tl-lg p-5`}
           >
-            <DetailBookPage setHideDetail={setHideDetail} id={indexBook} />
+            <DetailBookHome setHideDetail={setHideDetail} id={indexBook} />
           </div>
         )}
       </div>
