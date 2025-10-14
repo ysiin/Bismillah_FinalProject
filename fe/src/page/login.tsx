@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { toast } from "sonner";
+import { loginUser } from "@/axios/api";
 
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
@@ -8,42 +9,36 @@ import AuthPasswordInput from "@/components/ui/passwordInput";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState(""); // ganti username → email
   const [password, setPassword] = useState("");
 
-  const account = [
-    { username: "suri", password: "1234" },
-    { username: "john", password: "5678" },
-  ];
+  const handleLogin = async () => {
+    try {
+      const res = await loginUser(email, password);
+      console.log("RESPON LOGIN:", res);
+      if (res.success) {
+        // simpan user & token ke localStorage
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("user", JSON.stringify(res.user));
 
-  useEffect(() => {
-    if (!localStorage.getItem("accounts")) {
-      localStorage.setItem("accounts", JSON.stringify(account));
-    }
-  }, []);
+        toast("Login berhasil!", {
+          description: `Selamat datang ${res.user.name}`,
+          action: {
+            label: "OK",
+            onClick: () => navigate("/"),
+          },
+        });
 
-  const handleLogin = () => {
-    const storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
-
-    const user = storedAccounts.find(
-      (acc: { username: string; password: string }) =>
-        acc.username === username && acc.password === password
-    );
-
-    if (user) {
-      localStorage.setItem("loggedInUser", JSON.stringify(user));
-      alert("Login berhasil!");
-      toast("Login berhasil!", {
-        description: `Selamat datang ${user.username}`,
-        action: {
-          label: "OK",
-          onClick: () => console.log("User acknowledged"),
-        },
+        navigate("/");
+      } else {
+        toast("Login gagal!", {
+          description: res.message || "Email atau password salah.",
+        });
+      }
+    } catch (err: any) {
+      toast("Login gagal!", {
+        description: err.response?.data?.message || "Terjadi kesalahan server.",
       });
-
-      navigate("/");
-    } else {
-      alert("Username atau password salah!");
     }
   };
 
@@ -59,8 +54,8 @@ export default function Login() {
         <AuthInput
           label="Username or Email"
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <AuthPasswordInput
           label="Password"
