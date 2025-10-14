@@ -26,7 +26,7 @@ export default function HeaderCategory({
 }: HeaderCategoryProps) {
   return (
     <>
-      <div className="bg-[#F0F5FF] p-5 rounded-[10px] flex flex-row items-end gap-5">
+      <div className="bg-[#F0F5FF] shadow shadow-black/30 p-5 rounded-[10px] flex flex-row items-end gap-5">
         <div className="flex flex-row gap-5 items-center">
           <div className="relative w-[500px]">
             <Search className="absolute left-5 top-3 h-5 w-5 text-gray-100 cursor-pointer" />
@@ -54,14 +54,14 @@ export default function HeaderCategory({
           </div>
           <Button
             onClick={handleFilter}
-            className="bg-[#4682f8] text-white hover:bg-[#0054FE] cursor-pointer"
+            className="bg-[#4682f8] text-white hover:bg-[#0054FE] cursor-pointer shadow shadow-black/30"
           >
             Search
           </Button>
           <Button
             onClick={handleResetFilters}
             variant="outline"
-            className="bg-red-400 text-white hover:bg-red-500 border-none cursor-pointer"
+            className="bg-red-400 text-white hover:bg-red-500 border-none cursor-pointer shadow shadow-black/30"
           >
             Reset
           </Button>

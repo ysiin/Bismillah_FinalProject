@@ -65,7 +65,7 @@ export default function Home() {
 
       <div
         className={`${
-          hideDetail ? "" : "flex flex-row justify-between"
+          hideDetail ? "" : "flex flex-row justify-between gap-0"
         } overflow-y-auto bg-[#EAEFF4] h-[88.3%]`}
         style={{
           scrollbarWidth: "none",
@@ -73,7 +73,7 @@ export default function Home() {
         }}
       >
         <div
-          className="flex flex-col overflow-y-auto h-full"
+          className="flex flex-col overflow-y-auto h-full p-10 gap-10"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
