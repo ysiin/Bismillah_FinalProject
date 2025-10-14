@@ -36,12 +36,19 @@ export default function ProfileDropdown() {
           onMouseLeave={() => setOpen(false)}
           className="absolute right-2 top-26  w-60 border border-gray-700 rounded-md bg-gray-50 shadow-lg flex flex-col gap-4 p-4 z-10"
         >
-          <div className="flex flex-col gap-1 items-center">
+          <Link
+            to="/profile"
+            className="
+              flex flex-col gap-1 items-center p-2
+              hover:bg-gray-100 active:scale-95 cursor-pointer
+              transition-all duration-200
+            "
+          >
             {!account ? <UserIcon height={40} width={40} /> : <Pfp />}
             <p className="text-center font-semibold">
               {account?.username ?? "Guest"}
             </p>
-          </div>
+          </Link>
           <hr className="text-gray-900" />
 
           {!account ? (

@@ -60,8 +60,8 @@ export default function RecommendedSection({
               msOverflowStyle: "none",
             }}
           >
-            {booksToDisplay.length > 0 ? (
-              booksToDisplay.map((book) => (
+            {booksToDisplay?.length > 0 ? (
+              booksToDisplay?.map((book) => (
                 <div
                   key={book.id}
                   className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"

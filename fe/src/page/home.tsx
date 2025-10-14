@@ -49,8 +49,8 @@ export default function Home() {
   const recommendedBooks = showAll
     ? books
     : hideDetail
-    ? books.slice(0, 6)
-    : books.slice(0, 5);
+    ? books?.slice(0, 6)
+    : books?.slice(0, 5);
 
   const categoryBooks = books;
 

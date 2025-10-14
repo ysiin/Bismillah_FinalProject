@@ -56,7 +56,7 @@ export default function CategorySection({
             >
               All
             </li>
-            {categoriesBooks.map((item, index) => (
+            {categoriesBooks?.map((item, index) => (
               <li
                 className={`${
                   selectedCategory == item?.id
@@ -82,8 +82,8 @@ export default function CategorySection({
               msOverflowStyle: "none",
             }}
           >
-            {filteredBooks.length > 0 ? (
-              filteredBooks.map((book) => (
+            {filteredBooks?.length > 0 ? (
+              filteredBooks?.map((book) => (
                 <div
                   key={book.id}
                   className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"
