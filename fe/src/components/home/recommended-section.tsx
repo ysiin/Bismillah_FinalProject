@@ -24,7 +24,7 @@ export default function RecommendedSection({
   return (
     <>
       <div
-        className={`flex flex-col gap-5 max-h-full bg-white rounded-2xl mx-8 mt-10 px-3.5 py-5  ${
+        className={`flex flex-col gap-5 max-h-full bg-white rounded-2xl px-3.5 py-5  ${
           hideDetail ? "w-auto " : "w-fit"
         }`}
         style={showAll ? { height: "700px" } : {}}
