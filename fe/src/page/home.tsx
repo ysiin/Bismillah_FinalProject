@@ -1,10 +1,8 @@
 import { getBooks } from "@/axios/api";
 import CategorySection from "@/components/home/category-section";
-
 import RecommendedSection from "@/components/home/recommended-section";
 import { useEffect, useState } from "react";
 import HeaderSection from "@/components/header-section";
-import DetailBookHome from "@/components/home/detail-book";
 
 export interface Book {
   id: number;
@@ -23,8 +21,6 @@ export interface Book {
 
 export default function Home() {
   const [showAll, setShowAll] = useState(false);
-  const [hideDetail, setHideDetail] = useState(true);
-  const [indexBook, setIndexBook] = useState<number | null>(null);
   const [books, setBooks] = useState<Book[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
@@ -47,11 +43,7 @@ export default function Home() {
     }
   };
 
-  const recommendedBooks = showAll
-    ? books
-    : hideDetail
-    ? books.slice(0, 6)
-    : books.slice(0, 5);
+  const recommendedBooks = showAll ? books : books.slice(0, 6);
 
   const categoryBooks = books;
 
@@ -64,16 +56,14 @@ export default function Home() {
       </header>
 
       <div
-        className={`${
-          hideDetail ? "" : "flex flex-row justify-between gap-0"
-        } overflow-y-auto bg-[#EAEFF4] h-[88.3%]`}
+        className={`overflow-y-auto bg-[#EAEFF4] h-[88.3%]`}
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
       >
         <div
-          className="flex flex-col overflow-y-auto h-full p-10 gap-10"
+          className="flex flex-col overflow-y-auto h-full p-5 gap-10"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
@@ -84,26 +74,9 @@ export default function Home() {
             searchQuery={searchQuery}
             showAll={showAll}
             setShowAll={setShowAll}
-            hideDetail={hideDetail}
-            setHideDetail={setHideDetail}
-            setIndexBook={setIndexBook}
           />
-          <CategorySection
-            booksToDisplay={categoryBooks}
-            hideDetail={hideDetail}
-            setHideDetail={setHideDetail}
-            setIndexBook={setIndexBook}
-          />
+          <CategorySection booksToDisplay={categoryBooks} />
         </div>
-        {!hideDetail && indexBook && (
-          <div
-            className={`flex-1 h-full  ${
-              !searchQuery ? "max-w-[250px]" : "max-w-full"
-            }  bg-[#001743] rounded-bl-lg rounded-tl-lg p-5`}
-          >
-            <DetailBookHome setHideDetail={setHideDetail} id={indexBook} />
-          </div>
-        )}
       </div>
     </>
   );

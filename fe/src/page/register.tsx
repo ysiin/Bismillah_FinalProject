@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
+import { toast, Toaster } from "sonner";
+import api from "@/axios/api";
 
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
@@ -7,27 +9,54 @@ import AuthPasswordInput from "@/components/ui/passwordInput";
 
 export default function Register() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = () => {
-    const accounts = JSON.parse(localStorage.getItem("accounts") || "[]");
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    if (accounts.some((u: any) => u.username === username)) {
-      alert("Username sudah dipakai!");
-      return;
+    try {
+      const response = await api.post("/register", {
+        name,
+        email,
+        password,
+        password_confirmation: confirmPassword, // jika backend pakai confirmed
+        role: "anggota", // sesuai validasi Laravel
+      });
+
+      // Laravel biasanya return 201 Created jika sukses
+      if (response.status === 201 || response.data?.user) {
+        toast.success("Registrasi Berhasil", {
+          description: "Silakan login dengan akun Anda.",
+        });
+        navigate("/login");
+      } else {
+        toast.error("Registrasi Gagal", {
+          description:
+            response.data?.message || "Terjadi kesalahan pada server.",
+        });
+      }
+    } catch (error: any) {
+      console.error("Register error:", error);
+
+      // Ambil pesan validasi Laravel
+      const messages = error.response?.data?.errors
+        ? Object.values(error.response.data.errors).flat().join("\n")
+        : error.response?.data?.message || "Terjadi kesalahan saat registrasi.";
+
+      toast.error("Registrasi Gagal", {
+        description: messages,
+      });
     }
-
-    accounts.push({ username, email, password });
-    localStorage.setItem("accounts", JSON.stringify(accounts));
-
-    alert("Register berhasil, silakan login!");
-    navigate("/login");
   };
 
   return (
     <>
+      <Toaster richColors position="top-center" />
+
       <div className="flex justify-center">
         <Link to="/" className="text-center mt-20 text-3xl">
           <span className="font-bold">Book</span>Base
@@ -36,14 +65,14 @@ export default function Register() {
 
       <AuthCard title="Register" onSubmit={handleRegister}>
         <AuthInput
-          label="Username"
+          label="Name"
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <AuthInput
           label="Email"
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -52,6 +81,12 @@ export default function Register() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+        <AuthPasswordInput
+          label="Confirm Password"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </AuthCard>
     </>
