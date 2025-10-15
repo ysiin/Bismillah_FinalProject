@@ -1,15 +1,13 @@
 import { ChevronRight } from "lucide-react";
 import Img1 from "@/assets/img1.jpg";
 import type { Book } from "@/page/home";
+import { Link } from "react-router";
 
 interface RecommendedSectionProps {
   booksToDisplay: Book[];
   searchQuery: string;
   showAll: boolean;
   setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
-  hideDetail: boolean;
-  setHideDetail: React.Dispatch<React.SetStateAction<boolean>>;
-  setIndexBook: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export default function RecommendedSection({
@@ -17,16 +15,11 @@ export default function RecommendedSection({
   searchQuery,
   showAll,
   setShowAll,
-  hideDetail,
-  setHideDetail,
-  setIndexBook,
 }: RecommendedSectionProps) {
   return (
     <>
       <div
-        className={`flex flex-col gap-5 max-h-full bg-white rounded-2xl px-3.5 py-5  ${
-          hideDetail ? "w-auto " : "w-fit"
-        }`}
+        className={`flex flex-col gap-5 max-h-full bg-white rounded-2xl px-3.5 py-5  ${"w-auto "}`}
         style={showAll ? { height: "700px" } : {}}
       >
         <div className="flex flex-row justify-between items-center">
@@ -51,9 +44,9 @@ export default function RecommendedSection({
 
         <div className="flex justify-center">
           <div
-            className={`pt-5 ${
-              hideDetail ? "flex flex-wrap" : "grid grid-cols-5"
-            } gap-5 w-full ${showAll ? "overflow-y-auto" : ""} py-1 px-1`}
+            className={`pt-5 flex flex-wrap gap-5 w-full ${
+              showAll ? "overflow-y-auto" : ""
+            } py-1 px-1`}
             style={{
               maxHeight: "600px",
               scrollbarWidth: "none",
@@ -62,26 +55,24 @@ export default function RecommendedSection({
           >
             {booksToDisplay.length > 0 ? (
               booksToDisplay.map((book) => (
-                <div
-                  key={book.id}
-                  className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"
-                  onClick={() => {
-                    setHideDetail(false);
-                    setIndexBook(book.id);
-                  }}
-                >
-                  <div className="w-[200px] h-[305px] rounded-lg">
-                    <img
-                      src={Img1}
-                      alt={book.title}
-                      className="w-full h-full rounded-lg"
-                    />
+                <Link to={`/details/book/${book.id}`} key={book.id}>
+                  <div
+                    key={book.id}
+                    className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"
+                  >
+                    <div className="w-[200px] h-[305px] rounded-lg">
+                      <img
+                        src={Img1}
+                        alt={book.title}
+                        className="w-full h-full rounded-lg"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="text-lg font-semibold">{book.title}</p>
+                      <p className="text-gray-300">{book.author}</p>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <p className="text-lg font-semibold">{book.title}</p>
-                    <p className="text-gray-300">{book.author}</p>
-                  </div>
-                </div>
+                </Link>
               ))
             ) : (
               <div className="w-full text-center">
