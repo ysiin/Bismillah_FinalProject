@@ -1,20 +1,13 @@
-import { Link } from "react-router";
-import { useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import { ChevronDown, ChevronUpIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router";
 
 import Pfp from "../ui/loggedInPfp";
 
 export default function ProfileDropdown() {
   const [open, setOpen] = useState(false);
-  const [account, setAccount] = useState<{ username: string } | null>(null);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("loggedInUser");
-    if (stored) {
-      setAccount(JSON.parse(stored));
-    }
-  }, []);
+  const { user, logout, isAuthenticated } = useAuth();
 
   return (
     <>
@@ -24,8 +17,8 @@ export default function ProfileDropdown() {
         onMouseLeave={() => setOpen(false)}
       >
         <div className="flex flex-row gap-2 items-center ">
-          {!account ? <UserIcon /> : <Pfp />}
-          <p>{account?.username ?? "Guest"}</p>
+          {!isAuthenticated ? <UserIcon /> : <Pfp />}
+          <p>{user?.name ?? "Guest"}</p>
         </div>
         {open ? <ChevronUpIcon /> : <ChevronDown />}
       </div>
@@ -37,14 +30,12 @@ export default function ProfileDropdown() {
           className="absolute right-2 top-26  w-60 border border-gray-700 rounded-md bg-gray-50 shadow-lg flex flex-col gap-4 p-4 z-10"
         >
           <div className="flex flex-col gap-1 items-center">
-            {!account ? <UserIcon height={40} width={40} /> : <Pfp />}
-            <p className="text-center font-semibold">
-              {account?.username ?? "Guest"}
-            </p>
+            {!isAuthenticated ? <UserIcon height={40} width={40} /> : <Pfp />}
+            <p className="text-center font-semibold">{user?.name ?? "Guest"}</p>
           </div>
           <hr className="text-gray-900" />
 
-          {!account ? (
+          {!isAuthenticated ? (
             <div className="flex flex-col gap-1">
               <Link to="/login">
                 <p className="text-center bg-button text-white py-2 hover:bg-button-hover rounded-sm">
@@ -59,10 +50,7 @@ export default function ProfileDropdown() {
             </div>
           ) : (
             <button
-              onClick={() => {
-                localStorage.removeItem("loggedInUser");
-                setAccount(null);
-              }}
+              onClick={logout}
               className="text-center bg-red-500 text-white py-2 hover:bg-red-700 rounded-sm"
             >
               Logout
