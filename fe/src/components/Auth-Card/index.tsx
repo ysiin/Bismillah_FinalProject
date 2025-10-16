@@ -3,7 +3,7 @@ import { Link } from "react-router";
 interface AuthCardProps {
   title: "Login" | "Register";
   children?: React.ReactNode;
-  onSubmit?: () => void;
+  onSubmit?: (e: React.FormEvent) => void;
 }
 
 export default function AuthCard({ title, children, onSubmit }: AuthCardProps) {
@@ -11,7 +11,7 @@ export default function AuthCard({ title, children, onSubmit }: AuthCardProps) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit?.();
+        onSubmit?.(e);
       }}
       className="bg-white rounded-xl border border-gray-400 max-w-md mx-auto space-y-4 mt-20 p-8"
     >

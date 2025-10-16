@@ -1,12 +1,13 @@
 import axios from "axios";
 
-const API_BOOKS = import.meta.env.VITE_API_BOOKS as string;
-const API_CATEGORIES = import.meta.env.VITE_API_CATEGORIES as string;
-const API_LOGIN= import.meta.env.VITE_API_LOGIN as string;
+const api = axios.create({
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+  withCredentials: true, // Important for Sanctum
+});
 
 export const getBooks = async () => {
   try {
-    const response = await axios.get(API_BOOKS);
+    const response = await api.get("/books");
     return response.data.data;
   } catch (error) {
     console.error("Error fetching books:", error);
@@ -16,7 +17,7 @@ export const getBooks = async () => {
 
 export const getDetailsBooks = async (id: string | number) => {
   try {
-    const response = await axios.get(`${API_BOOKS}/${id}`);
+    const response = await api.get(`/books/${id}`);
     console.log("DETAIL RESPONSE:", response.data);
     return response.data.data;
   } catch (error) {
@@ -27,7 +28,7 @@ export const getDetailsBooks = async (id: string | number) => {
 
 export const getCategories = async () => {
   try {
-    const response = await axios.get(API_CATEGORIES);
+    const response = await api.get("/categories");
     return response.data.data;
   } catch (error) {
     console.error("Error fetching books:", error);
@@ -35,16 +36,4 @@ export const getCategories = async () => {
   }
 };
 
-export const loginUser = async (email: string, password: string) => {
-  try {
-    const response = await axios.post(API_LOGIN, {
-      email,
-      password,
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error("Error login:", error);
-    throw error;
-  }
-};
+export default api;

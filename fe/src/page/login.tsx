@@ -1,49 +1,56 @@
 import { Link, useNavigate } from "react-router";
-import { useState} from "react";
-import { toast } from "sonner";
-import { loginUser } from "@/axios/api";
+import { useState } from "react";
+import { toast, Toaster } from "sonner";
 
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
 import AuthPasswordInput from "@/components/ui/passwordInput";
+import { useAuth } from "@/contexts/AuthContext";
+import api from "@/axios/api";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(""); // ganti username → email
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      const res = await loginUser(email, password);
-      console.log("RESPON LOGIN:", res);
-      if (res.success) {
-        // simpan user & token ke localStorage
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("user", JSON.stringify(res.user));
+      const response = await api.post("/login", { email, password });
 
-        toast("Login berhasil!", {
-          description: `Selamat datang ${res.user.name}`,
-          action: {
-            label: "OK",
-            onClick: () => navigate("/"),
-          },
+      if (response.data.success) {
+        const { user, token } = response.data;
+
+        await login(user, token);
+
+        toast.success("Login berhasil!", {
+          description: `Selamat datang ${user.name}`,
         });
 
-        navigate("/");
+        if (user.role === "admin") {
+          navigate("/dashboard");
+        } else {
+          navigate("/");
+        }
       } else {
-        toast("Login gagal!", {
-          description: res.message || "Email atau password salah.",
+        toast.error("Login Gagal", {
+          description: response.data.message || "Email atau password salah!",
         });
       }
-    } catch (err: any) {
-      toast("Login gagal!", {
-        description: err.response?.data?.message || "Terjadi kesalahan server.",
+    } catch (error: any) {
+      console.error("Login error:", error);
+      const errorMessage =
+        error.response?.data?.message || "Terjadi kesalahan saat login.";
+      toast.error("Login Gagal", {
+        description: errorMessage,
       });
     }
   };
 
   return (
-    <div>
+    <>
+      <Toaster richColors position="top-center" />
       <div className="flex justify-center">
         <Link to="/" className="text-center mt-20 text-3xl">
           <span className="font-bold">Book</span>Base
@@ -52,8 +59,13 @@ export default function Login() {
 
       <AuthCard title="Login" onSubmit={handleLogin}>
         <AuthInput
+<<<<<<< HEAD
           label="Username or Email"
           type="text"
+=======
+          label="Email"
+          type="email"
+>>>>>>> d8367acc8a0e7f566fd0506230d10118010bb81d
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -64,6 +76,6 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </AuthCard>
-    </div>
+    </>
   );
 }
