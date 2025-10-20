@@ -21,7 +21,11 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext.tsx";
 
 // Protected Route for Admin
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner component
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -36,7 +40,11 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
 
 // Protected Route for Authenticated Users (anggota)
 const AuthenticatedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner component
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

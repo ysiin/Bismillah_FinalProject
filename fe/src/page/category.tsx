@@ -103,7 +103,7 @@ export default function Category() {
       <header className="w-full h-28">
         <HeaderSection handleSearch={() => {}} searchQuery="" />
       </header>
-      <div className="flex flex-col gap-10 bg-[#EAEFF4] h-[88.3%] p-10">
+      <div className="flex flex-col gap-10 bg-[#EAEFF4] h-[88.3%] p-5">
         <HeaderCategory
           handleSearch={handleSearchChange}
           searchQuery={searchQuery}
