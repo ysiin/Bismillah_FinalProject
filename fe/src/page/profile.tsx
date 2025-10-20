@@ -2,7 +2,19 @@ import profilebg from "../assets/user-bg.jpg";
 import profilePict from "../assets/LoggedInPfp.png";
 import ProfileInfo from "@/components/profile/profileInfo";
 
+import { useAuth } from "@/contexts/AuthContext";
+
 export default function Profile() {
+  const { user, isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return <div className="text-center mt-10">Kamu belum login</div>;
+  }
+
+  if (!user) {
+    return <div className="text-center mt-10">Memuat data user...</div>;
+  }
+
   return (
     <>
       <div className="w-full relative">
@@ -14,10 +26,10 @@ export default function Profile() {
 
         {/* Profile Picture */}
         <div className="absolute left-6 top-[100px] md:left-12 md:top-[130px] flex flex-col items-center md:flex-row md:items-end">
-  <img
-    src={profilePict}
-    alt="profile"
-    className="
+          <img
+            src={profilePict}
+            alt="profile"
+            className="
       rounded-full object-cover shadow-2xl
       w-[80px] h-[80px]
       sm:w-[100px] sm:h-[100px]
@@ -25,20 +37,20 @@ export default function Profile() {
       lg:w-[140px] lg:h-[140px]
       transition-all duration-300
     "
-  />
-  <h2 className="text-4xl mt-2 md:mt-0 md:pt-12 md:px-8 font-semibold text-center md:text-left">
-    User
-  </h2>
-</div>
+          />
+          <h2 className="text-4xl mt-2 md:mt-0 md:pt-12 md:px-8 font-semibold text-center md:text-left">
+            User
+          </h2>
+        </div>
       </div>
 
       {/* Profile Info */}
       <div className="mt-[80px] md:mt-[100px]">
         <ProfileInfo
-          name="Akbar Ghazali"
-          memberId="MBR12345"
-          email="akbar@example.com"
-          phone="+62 812 3456 7890"
+          role={user.role}
+          name={user.name}
+          memberId={user.id}
+          email={user.email}
         />
       </div>
     </>

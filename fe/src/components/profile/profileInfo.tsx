@@ -1,16 +1,17 @@
 interface UserInfoProps {
+  role: string;
   name: string;
   memberId: string;
   email: string;
 }
 
-export default function ProfileInfo({ name, memberId, email }: UserInfoProps) {
+export default function ProfileInfo({ role, name, memberId, email }: UserInfoProps) {
   return (
     <div className="container mx-auto px-2 md:px-10 pt-8 md:pt-0">
     <div className="w-full bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4 rounded-t-2xl">
-        <h2 className="text-xl md:text-2xl font-bold text-white">Profile Information</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-white">{role}</h2>
       </div>
 
       {/* Content */}

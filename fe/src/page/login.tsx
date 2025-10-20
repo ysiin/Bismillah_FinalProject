@@ -16,35 +16,33 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      const response = await api.post("/login", { email, password });
+      // Step 1: Ambil CSRF cookie
+      await api.get("/sanctum/csrf-cookie");
+
+      // Step 2: Kirim data login
+      const response = await api.post("/api/login", { email, password });
 
       if (response.data.success) {
         const { user, token } = response.data;
-
         await login(user, token);
 
         toast.success("Login berhasil!", {
           description: `Selamat datang ${user.name}`,
         });
 
-        if (user.role === "admin") {
-          navigate("/dashboard");
-        } else {
-          navigate("/");
-        }
+        navigate(user.role === "admin" ? "/dashboard" : "/");
       } else {
-        toast.error("Login Gagal", {
+        toast.error("Login gagal", {
           description: response.data.message || "Email atau password salah!",
         });
       }
     } catch (error: any) {
       console.error("Login error:", error);
-      const errorMessage =
+      const msg =
         error.response?.data?.message || "Terjadi kesalahan saat login.";
-      toast.error("Login Gagal", {
-        description: errorMessage,
-      });
+      toast.error("Login gagal", { description: msg });
     }
   };
 
@@ -59,13 +57,8 @@ export default function Login() {
 
       <AuthCard title="Login" onSubmit={handleLogin}>
         <AuthInput
-<<<<<<< HEAD
-          label="Username or Email"
-          type="text"
-=======
           label="Email"
           type="email"
->>>>>>> d8367acc8a0e7f566fd0506230d10118010bb81d
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

@@ -53,24 +53,6 @@ export default function RecommendedSection({
               msOverflowStyle: "none",
             }}
           >
-<<<<<<< HEAD
-            {booksToDisplay?.length > 0 ? (
-              booksToDisplay?.map((book) => (
-                <div
-                  key={book.id}
-                  className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]"
-                  onClick={() => {
-                    setHideDetail(false);
-                    setIndexBook(book.id);
-                  }}
-                >
-                  <div className="w-[200px] h-[305px] rounded-lg">
-                    <img
-                      src={Img1}
-                      alt={book.title}
-                      className="w-full h-full rounded-lg"
-                    />
-=======
             {booksToDisplay.length > 0 ? (
               booksToDisplay.map((book) => (
                 <Link to={`/details/book/${book.id}`} key={book.id}>
@@ -89,7 +71,6 @@ export default function RecommendedSection({
                       <p className="text-lg font-semibold">{book.title}</p>
                       <p className="text-gray-300">{book.author}</p>
                     </div>
->>>>>>> d8367acc8a0e7f566fd0506230d10118010bb81d
                   </div>
                 </Link>
               ))
