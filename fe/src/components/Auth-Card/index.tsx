@@ -22,14 +22,14 @@ export default function AuthCard({ title, children, onSubmit }: AuthCardProps) {
       {title === "Login" ? (
         <p className="text-sm text-center pt-4">
           Belum Memiliki Akun?{" "}
-          <Link to="/register" className="text-blue-500">
+          <Link to="/register" className="text-blue-500 cursor-pointer">
             Register
           </Link>
         </p>
       ) : (
         <p className="text-sm text-center pt-4">
           Sudah Memiliki Akun?{" "}
-          <Link to="/login" className="text-blue-500">
+          <Link to="/login" className="text-blue-500 cursor-pointer">
             Login
           </Link>
         </p>

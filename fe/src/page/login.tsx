@@ -7,6 +7,7 @@ import AuthInput from "@/components/ui/authInput";
 import AuthPasswordInput from "@/components/ui/passwordInput";
 import { useAuth } from "@/contexts/AuthContext";
 import api from "@/axios/api";
+import ImgBook from "@/assets/buku.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -52,9 +53,14 @@ export default function Login() {
     <>
       <Toaster richColors position="top-center" />
       <div className="flex justify-center">
-        <Link to="/" className="text-center mt-20 text-3xl">
-          <span className="font-bold">Book</span>Base
-        </Link>
+        {/* <Link to="/" className="text-center mt-20 text-3xl"> */}
+        <div className="flex gap-2.5 items-center mt-20 justify-center">
+          <img src={ImgBook} className="w-18 h-14" />
+          <div className="text-center text-3xl">
+            <span className="font-bold text-3xl">Book</span>Base
+          </div>
+        </div>
+        {/* </Link> */}
       </div>
 
       <AuthCard title="Login" onSubmit={handleLogin}>

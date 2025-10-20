@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/contexts/AuthContext";
+import ImgBook from "@/assets/buku.png";
 
 export default function Header() {
   const location = useLocation();
@@ -17,7 +18,12 @@ export default function Header() {
     <div className="flex flex-col">
       <div className="flex flex-col gap-5">
         <div className="py-10 px-4">
-          <span className="border border-red-400 mx-5 py-5 px-15">CakBook</span>
+          <div className="flex gap-2.5 items-center justify-center">
+            <img src={ImgBook} className="w-18 h-14" />
+            <div className="text-center text-3xl">
+              <span className="font-bold text-3xl">Book</span>Base
+            </div>
+          </div>
         </div>
         <ul className="flex flex-col gap-5">
           {user?.role === "admin" ? (
@@ -53,7 +59,7 @@ export default function Header() {
                     <div className="p-2">
                       <HouseIcon />
                     </div>
-                    <li className="text-gray-400">Beranda</li>
+                    <li className="text-gray-400">Discover</li>
                   </div>
                 )}
               </Link>
