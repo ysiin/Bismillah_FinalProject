@@ -14,7 +14,7 @@ export default function AuthButton({
     <button
       type={type}
       onClick={onClick}
-      className="w-full py-2 bg-accent-50 text-white rounded-lg"
+      className="w-full py-2 bg-accent-50 text-white rounded-lg cursor-pointer"
     >
       {text}
     </button>

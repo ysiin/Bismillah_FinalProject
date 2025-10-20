@@ -125,7 +125,7 @@ function MainLayout({ children }: { children?: React.ReactNode }) {
       <header className="shadow-[4px_0_6px_-1px_rgba(0,0,0,0.1)] h-screen w-60">
         <Header />
       </header>
-      <main className="flex-1 p-4 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto">
         {children || <Outlet />}
         <Toaster richColors position="top-center" />
       </main>

@@ -6,6 +6,7 @@ import api from "@/axios/api";
 import AuthCard from "@/components/Auth-Card";
 import AuthInput from "@/components/ui/authInput";
 import AuthPasswordInput from "@/components/ui/passwordInput";
+import ImgBook from "@/assets/buku.png";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -58,9 +59,14 @@ export default function Register() {
       <Toaster richColors position="top-center" />
 
       <div className="flex justify-center">
-        <Link to="/" className="text-center mt-20 text-3xl">
-          <span className="font-bold">Book</span>Base
-        </Link>
+        {/* <Link to="/" className="text-center mt-20"> */}
+        <div className="flex gap-2.5  mt-20 items-center justify-center">
+          <img src={ImgBook} className="w-18 h-14" />
+          <div className="text-center text-3xl">
+            <span className="font-bold text-3xl">Book</span>Base
+          </div>
+        </div>
+        {/* </Link> */}
       </div>
 
       <AuthCard title="Register" onSubmit={handleRegister}>

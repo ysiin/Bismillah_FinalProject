@@ -8,9 +8,9 @@ interface BodyCategoryProps {
 
 export default function BodyCategory({ books }: BodyCategoryProps) {
   return (
-    <div className="flex bg-white justify-center rounded-[10px] px-3.5 py-3 border border-black">
+    <div className="flex bg-white justify-center rounded-[10px] px-3.5 py-3">
       <div
-        className={`flex flex-wrap overflow-x-auto pt-5 border border-orange max-w-fit gap-5 rounded-[10px]`}
+        className={`flex flex-wrap overflow-x-auto pt-5 max-w-fit gap-5 rounded-[10px]`}
         style={{
           maxHeight: "600px",
           scrollbarWidth: "none",
