@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { getBooks, createBook, updateBook, deleteBook, getCategories } from "../../axios/api";
+import {
+  getBooks,
+  createBook,
+  updateBook,
+  deleteBook,
+  getCategories,
+} from "../../axios/api";
 
 interface Book {
   id: number;
@@ -71,7 +77,10 @@ export default function BookCrud() {
     <div>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">Books</h2>
-        <button onClick={handleAdd} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          onClick={handleAdd}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
           Add Book
         </button>
       </div>
@@ -99,10 +108,16 @@ export default function BookCrud() {
               <td className="px-6 py-4">{book.author}</td>
               <td className="px-6 py-4">{book.year_published}</td>
               <td className="px-6 py-4">
-                <button onClick={() => handleEdit(book)} className="font-medium text-blue-600 hover:underline mr-4">
+                <button
+                  onClick={() => handleEdit(book)}
+                  className="font-medium text-blue-600 hover:underline mr-4"
+                >
                   Edit
                 </button>
-                <button onClick={() => handleDelete(book.id)} className="font-medium text-red-600 hover:underline">
+                <button
+                  onClick={() => handleDelete(book.id)}
+                  className="font-medium text-red-600 hover:underline"
+                >
                   Delete
                 </button>
               </td>
@@ -113,14 +128,25 @@ export default function BookCrud() {
       {showModal && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div
+              className="absolute inset-0 transition-opacity"
+              aria-hidden="true"
+            >
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
               &#8203;
             </span>
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <BookForm book={currentBook} categories={categories} onSave={handleSave} onCancel={() => setShowModal(false)} />
+            <div className="inline-block align-bottom relative z-20 bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <BookForm
+                book={currentBook}
+                categories={categories}
+                onSave={handleSave}
+                onCancel={() => setShowModal(false)}
+              />
             </div>
           </div>
         </div>
@@ -129,7 +155,17 @@ export default function BookCrud() {
   );
 }
 
-function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; categories: Category[]; onSave: (book: Book) => void; onCancel: () => void }) {
+function BookForm({
+  book,
+  categories,
+  onSave,
+  onCancel,
+}: {
+  book: Book | null;
+  categories: Category[];
+  onSave: (book: Book) => void;
+  onCancel: () => void;
+}) {
   const [formData, setFormData] = useState({
     title: book?.title || "",
     author: book?.author || "",
@@ -144,7 +180,11 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
     ratings: book?.ratings || 1,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -159,10 +199,15 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
 
   return (
     <form onSubmit={handleSubmit} className="p-6">
-      <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">{book ? "Edit Book" : "Add Book"}</h3>
+      <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
+        {book ? "Edit Book" : "Add Book"}
+      </h3>
       <div className="grid grid-cols-2 gap-4">
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
+          >
             Title
           </label>
           <input
@@ -175,7 +220,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="author" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="author"
+            className="block text-sm font-medium text-gray-700"
+          >
             Author
           </label>
           <input
@@ -188,7 +236,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4 col-span-2">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
             Description
           </label>
           <textarea
@@ -200,7 +251,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="isbn" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="isbn"
+            className="block text-sm font-medium text-gray-700"
+          >
             ISBN
           </label>
           <input
@@ -213,7 +267,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="publisher" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="publisher"
+            className="block text-sm font-medium text-gray-700"
+          >
             Publisher
           </label>
           <input
@@ -226,7 +283,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="year_published" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="year_published"
+            className="block text-sm font-medium text-gray-700"
+          >
             Year Published
           </label>
           <input
@@ -239,7 +299,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="category_id" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="category_id"
+            className="block text-sm font-medium text-gray-700"
+          >
             Category
           </label>
           <select
@@ -257,7 +320,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           </select>
         </div>
         <div className="mb-4">
-          <label htmlFor="total_copies" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="total_copies"
+            className="block text-sm font-medium text-gray-700"
+          >
             Total Copies
           </label>
           <input
@@ -270,7 +336,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="available_copies" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="available_copies"
+            className="block text-sm font-medium text-gray-700"
+          >
             Available Copies
           </label>
           <input
@@ -283,7 +352,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="total_pages" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="total_pages"
+            className="block text-sm font-medium text-gray-700"
+          >
             Total Pages
           </label>
           <input
@@ -296,7 +368,10 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="ratings" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="ratings"
+            className="block text-sm font-medium text-gray-700"
+          >
             Ratings
           </label>
           <input
@@ -310,10 +385,17 @@ function BookForm({ book, categories, onSave, onCancel }: { book: Book | null; c
         </div>
       </div>
       <div className="flex justify-end mt-4">
-        <button type="button" onClick={onCancel} className="mr-2 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="mr-2 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
           Cancel
         </button>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
           Save
         </button>
       </div>
