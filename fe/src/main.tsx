@@ -22,7 +22,11 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext.tsx";
 
 // Protected Route for Admin
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner component
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -37,7 +41,11 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
 
 // Protected Route for Authenticated Users (anggota)
 const AuthenticatedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner component
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -122,7 +130,7 @@ function MainLayout({ children }: { children?: React.ReactNode }) {
       <header className="shadow-[4px_0_6px_-1px_rgba(0,0,0,0.1)] h-screen w-60">
         <Header />
       </header>
-      <main className="flex-1 p-4 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto">
         {children || <Outlet />}
         <Toaster richColors position="top-center" />
       </main>
