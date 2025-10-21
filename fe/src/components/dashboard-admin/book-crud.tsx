@@ -134,6 +134,7 @@ export default function BookCrud() {
             >
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
+
             <span
               className="hidden sm:inline-block sm:align-middle sm:h-screen"
               aria-hidden="true"
