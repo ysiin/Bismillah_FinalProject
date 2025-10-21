@@ -15,6 +15,35 @@ export const getBooks = async () => {
   }
 };
 
+export const createBook = async (book: any) => {
+  try {
+    const response = await api.post("/books", book);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error creating book:", error);
+    throw error;
+  }
+};
+
+export const updateBook = async (id: number, book: any) => {
+  try {
+    const response = await api.put(`/books/${id}`, book);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error updating book:", error);
+    throw error;
+  }
+};
+
+export const deleteBook = async (id: number) => {
+  try {
+    await api.delete(`/books/${id}`);
+  } catch (error) {
+    console.error("Error deleting book:", error);
+    throw error;
+  }
+};
+
 export const getDetailsBooks = async (id: string | number) => {
   try {
     const response = await api.get(`/books/${id}`);

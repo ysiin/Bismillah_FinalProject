@@ -26,23 +26,17 @@ export default function Header() {
           </div>
         </div>
         <ul className="flex flex-col gap-5">
-          {user?.role === "admin" ? (
+          {/* {
+            user?.
+          } */}
+          {user?.role === "admin" && currentPath === "/dashboard" ? (
             <Link to="/dashboard">
-              {currentPath === "/dashboard" ? (
-                <div className="flex flex-row px-4 py-2 items-center gap-2.5">
-                  <div className="bg-[#0C56F2] rounded-2xl p-2">
-                    <LayoutDashboard className="text-white" />
-                  </div>
-                  <li className="text-accent-50 font-semibold">Dashboard</li>
+              <div className="flex flex-row px-4 py-2 items-center gap-2.5">
+                <div className="bg-[#0C56F2] rounded-2xl p-2">
+                  <LayoutDashboard className="text-white" />
                 </div>
-              ) : (
-                <div className="flex flex-row px-4 py-2 items-center gap-2.5">
-                  <div className="p-2">
-                    <LayoutDashboard />
-                  </div>
-                  <li className="text-gray-400">Dashboard</li>
-                </div>
-              )}
+                <li className="text-accent-50 font-semibold">Dashboard</li>
+              </div>
             </Link>
           ) : (
             <>
