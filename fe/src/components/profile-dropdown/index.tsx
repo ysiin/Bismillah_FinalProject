@@ -37,7 +37,8 @@ export default function ProfileDropdown() {
           onMouseLeave={() => setOpen(false)}
           className="absolute right-0 top-10 w-60 border border-gray-200 rounded-md bg-white shadow-lg flex flex-col gap-4 p-4 z-10"
         >
-          <div className="flex flex-col gap-1 items-center">
+          <div className="flex flex-col gap-1 items-center hover:bg-gray-50"
+          onClick={() =>navigate("/profile")}>
             {!isAuthenticated ? (
               <UserIcon height={40} width={40} />
             ) : (

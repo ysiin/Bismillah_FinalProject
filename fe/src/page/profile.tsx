@@ -38,8 +38,8 @@ export default function Profile() {
       transition-all duration-300
     "
           />
-          <h2 className="text-4xl mt-2 md:mt-0 md:pt-12 md:px-8 font-semibold text-center md:text-left">
-            User
+          <h2 className="text-4xl md:text-5xl mt-2 md:mt-0 md:pt-12 md:px-8 font-semibold text-center md:text-left">
+            {user.name}
           </h2>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function Profile() {
       {/* Profile Info */}
       <div className="mt-[80px] md:mt-[100px]">
         <ProfileInfo
-          role={user.role}
+          role={user.role.charAt(0).toUpperCase() + user.role.slice(1)}
           name={user.name}
           memberId={user.id}
           email={user.email}

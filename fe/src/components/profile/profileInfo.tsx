@@ -1,7 +1,7 @@
 interface UserInfoProps {
   role: string;
   name: string;
-  memberId: string;
+  memberId: number;
   email: string;
 }
 

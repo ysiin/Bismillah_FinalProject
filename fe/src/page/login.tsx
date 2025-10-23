@@ -20,10 +20,10 @@ export default function Login() {
 
     try {
       // Step 1: Ambil CSRF cookie
-      await api.get("/sanctum/csrf-cookie");
+      await api.get("../sanctum/csrf-cookie");
 
       // Step 2: Kirim data login
-      const response = await api.post("/api/login", { email, password });
+      const response = await api.post("/login", { email, password });
 
       if (response.data.success) {
         const { user, token } = response.data;
