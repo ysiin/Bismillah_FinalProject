@@ -5,8 +5,9 @@ interface Book {
   title: string
   author: string
   year_published: number
-  isbn: string
+  rating: number
   category: string
+  description: string
 }
 
 export default function BookCard({ book }: { book: Book }) {
@@ -22,16 +23,16 @@ export default function BookCard({ book }: { book: Book }) {
           </div>
           <div className="flex gap-4">
             <p className="border rounded-md px-2 bg-accent-50 text-white font-semibold">
-              {book.year_published}
+              ⭐{book.rating}
             </p>
             <p className="border rounded-md px-2 bg-accent-50 text-white font-semibold">
-              {book.category}
+              {book.year_published}
             </p>
           </div>
         </div>
 
         <p className="text-lg font-semibold mt-2">{book.category}</p>
-        <p className="pt-4 text-gray-600">Deskripsi singkat buku...</p>
+        <p className="pt-4 text-gray-600">{book.description}</p>
       </div>
     </div>
   )

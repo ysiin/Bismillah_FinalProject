@@ -1,22 +1,37 @@
-import HeaderSection from "@/components/header-section"
-import BookList from "@/components/borrow-list/BookList"
-import { useEffect, useState } from "react"
-import api from "@/axios/api" // pastikan file api.ts ada
+import HeaderSection from "@/components/header-section";
+import BookList from "@/components/borrow-list/BookList";
+import { useEffect, useState } from "react";
+import api from "@/axios/api";
 
 export default function ListBook() {
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await api.get("/borrowed") // ganti endpoint sesuai backend-mu
-        setBooks(res.data)
+        const res = await api.get("/borrows");
+
+        const formattedBooks = res.data.flatMap((borrow: any) =>
+          borrow.details.map((detail: any) => ({
+            id: detail.book.id,
+            title: detail.book.title,
+            author: detail.book.author,
+            year_published: detail.book.year_published,
+            isbn: detail.book.isbn,
+            rating: detail.book.ratings,
+            category: detail.book.category.name ?? "Tanpa Kategori",
+            description: detail.book.description,
+          }))
+        );
+
+        setBooks(formattedBooks);
       } catch (err) {
-        console.error(err)
+        console.error("Gagal mengambil data borrow:", err);
       }
-    }
-    fetchBooks()
-  }, [])
+    };
+
+    fetchBooks();
+  }, []);
 
   return (
     <>
@@ -25,10 +40,10 @@ export default function ListBook() {
       </header>
 
       <div id="list-book" className="bg-[#EAEFF4] min-h-[88.3%] p-4">
-        <div id="main-content" className="border rounded-3xl w-full h-[830px] bg-white">
-        <BookList books={books} />
+        <div id="main-content" className="">
+          <BookList books={books} />
         </div>
       </div>
     </>
-  )
+  );
 }
