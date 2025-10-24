@@ -49,7 +49,7 @@ export default function CategorySection({
             >
               All
             </li>
-            {categoriesBooks.map((item, index) => (
+            {categoriesBooks?.map((item, index) => (
               <li
                 className={`${
                   selectedCategory == item?.id

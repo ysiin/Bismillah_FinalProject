@@ -14,6 +14,7 @@ import Login from "./page/login.tsx";
 import Register from "./page/register.tsx";
 import Category from "./page/category.tsx";
 import ListBook from "./page/list-booking.tsx";
+import Profile from "./page/profile.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
 import DetailBookPage from "./page/details-book.tsx";
 import DashboardAdmin from "./page/dashboard-admin/index.tsx";
@@ -89,6 +90,10 @@ let router = createBrowserRouter([
             <ListBook />
           </AuthenticatedRoute>
         ),
+      },
+      {
+        path: "/profile",
+        Component: Profile,
       },
       {
         path: "/details/book/:id",
