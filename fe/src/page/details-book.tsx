@@ -2,9 +2,12 @@ import Img1 from "@/assets/img1.jpg";
 import { getCategories, getDetailsBooks } from "@/axios/api";
 import HeaderSection from "@/components/header-section";
 import type { Book } from "@/page/home";
-import { ArrowLeftCircle } from "lucide-react";
+import {
+  ArrowLeftCircle,
+  //  Bookmark
+} from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import type { Category } from "@/components/home/category-section";
 
 export default function DetailBookPage() {
@@ -55,26 +58,36 @@ export default function DetailBookPage() {
                 className="w-full h-full rounded-lg"
               />
             </div>
-            <div className="flex flex-col gap-2 pl-5">
-              <p className="text-[16px] font-normal text-[#858A93]">
-                {book.author}
-              </p>
-              <h1 className="font-semibold text-4xl">{book.title}</h1>
-              <div className="flex flex-row gap-5 items-center">
-                <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
-                  ⭐ {book.ratings} / 5
+            <div className="flex flex-col justify-between">
+              <div className="flex flex-col gap-2 pl-5 ">
+                <p className="text-[16px] font-normal text-[#858A93]">
+                  {book.author}
                 </p>
-                <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
-                  ⭐ {book.year_published}
-                </p>
-                <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
-                  {book.total_pages} pages
-                </p>
-                <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
-                  ⭐ {book.ratings} / 5
-                </p>
+                <h1 className="font-semibold text-4xl">{book.title}</h1>
+                <div className="flex flex-row gap-5 items-center">
+                  <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
+                    ⭐ {book.ratings} / 5
+                  </p>
+                  <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
+                    ⭐ {book.year_published}
+                  </p>
+                  <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
+                    {book.total_pages} pages
+                  </p>
+                  <p className="text-white bg-accent-50 py-2 px-2.5 rounded-[10px]">
+                    ⭐ {book.ratings} / 5
+                  </p>
+                </div>
+                <p className="mt-2 w-[200px]">{book.description}</p>
               </div>
-              <p className="mt-2  w-[200px]">{book.description}</p>
+              <div className="flex flex-row items-center gap-1">
+                <Link
+                  to={"/"}
+                  className="py-2 px-8 bg-[#0054FE] text-white rounded-lg"
+                >
+                  Borrow
+                </Link>
+              </div>
             </div>
           </div>
         </div>
