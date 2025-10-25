@@ -62,7 +62,9 @@
   --color-button: #0054fe;
   --color-button-hover: #003bb3;
 }
-
+button {
+  cursor: pointer;
+}
 @theme inline {
   --animate-marquee: marquee var(--duration) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;

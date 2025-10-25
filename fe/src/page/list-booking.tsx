@@ -1,7 +1,7 @@
 import HeaderSection from "@/components/header-section";
-import BookList from "@/components/borrow-list/BookList";
 import { useEffect, useState } from "react";
 import api from "@/axios/api";
+import BookList from "@/components/borrow-list/Booklist";
 
 export default function ListBook() {
   const [books, setBooks] = useState([]);
