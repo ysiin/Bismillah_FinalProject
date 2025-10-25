@@ -65,4 +65,17 @@ export const getCategories = async () => {
   }
 };
 
+export const borrowBook = async (user_id: number, book_id: number, due_date: string) => {
+  try {
+    const response = await api.post("/borrows", {
+      user_id,
+      books: [{ book_id, due_date }],
+    });
+    return response.data.data;
+  } catch (error) {
+    console.error("Error borrowing book:", error);
+    throw error;
+  }
+};
+
 export default api;
