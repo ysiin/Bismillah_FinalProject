@@ -18,7 +18,7 @@
                     "Category"
                 ],
                 "summary": "List all categories",
-                "operationId": "ac9c4d978ea4e5b72915ca9728e5b8b1",
+                "operationId": "ba73d9ad93a5aa2016de8de062fb1090",
                 "responses": {
                     "200": {
                         "description": "Successful"

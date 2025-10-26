@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('available_copies')->default(1);
             $table->integer('total_pages')->nullable();
             $table->tinyInteger('ratings')->default(0);
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }

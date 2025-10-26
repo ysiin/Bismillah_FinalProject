@@ -18,11 +18,18 @@ class Book extends Model
         'available_copies',
         'total_pages',
         'ratings',
+        'cover_image',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    
+
+    protected $appends = ['cover_image_url'];
+
+    public function getCoverImageUrlAttribute()
+    {
+        return $this->cover_image ? asset('storage/' . $this->cover_image) : null;
+    }
 }

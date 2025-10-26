@@ -59,6 +59,7 @@ class BookController extends Controller
                 'available_copies' => 'required|integer|min:0|max:' . $request->total_copies,
                 'total_pages' => 'nullable|integer|min:1',
                 'ratings' => 'nullable|integer|min:1|max:5',
+                'cover_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
             $book = $this->bookRepository->createBook($request->all());
