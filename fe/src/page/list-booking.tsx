@@ -21,6 +21,8 @@ export default function ListBook() {
             rating: detail.book.ratings,
             category: detail.book.category.name ?? "Tanpa Kategori",
             description: detail.book.description,
+            due_date: detail.due_date,
+            returned_at: detail.returned_at,
           }))
         );
         console.log(res.data, "daata");
