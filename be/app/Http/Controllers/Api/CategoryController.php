@@ -7,6 +7,8 @@ use App\Models\Category;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use App\Repositories\CategoryRepository;
+
 
 
 /**
@@ -29,11 +31,17 @@ class CategoryController extends Controller
      *     )
      * )
      */
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     public function index()
     {
         try {
-            $categories = Category::all();
+            $categories = $this->categoryRepository->getAllCategories();
             return response()->json([
                 'success' => true,
                 'data' => $categories,
@@ -72,9 +80,7 @@ class CategoryController extends Controller
                 'name' => 'required|string|max:255'
             ]);
 
-            $category = Category::create([
-                'name' => $request->name
-            ]);
+            $category = $this->categoryRepository->createCategory($request->all());
 
             return response()->json([
                 'success' => true,
@@ -96,7 +102,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         try {
-            $category = Category::findOrFail($id);
+            $category = $this->categoryRepository->getCategoryById($id);
             return response()->json([
                 'success' => true,
                 'data' => $category
@@ -120,8 +126,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $category = Category::findOrFail($id);
-            $category->update($request->only('name'));
+            $category = $this->categoryRepository->updateCategory($id, $request->all());
 
             return response()->json([
                 'success' => true,
@@ -148,9 +153,7 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $category = Category::findOrFail($id);
-            $category->delete();
-
+            $this->categoryRepository->deleteCategory($id);
             return response()->json([
                 'success' => true,
                 'message' => 'Category deleted successfully'
