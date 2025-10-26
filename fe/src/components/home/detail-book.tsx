@@ -1,4 +1,3 @@
-import Img1 from "@/assets/img1.jpg";
 import { getDetailsBooks } from "@/axios/api";
 import type { Book } from "@/page/home";
 import { X } from "lucide-react";
@@ -39,7 +38,11 @@ export default function DetailBookHome({
         <X size={15} />
       </button>
       <div className="flex flex-col items-center gap-2">
-        <img src={Img1} alt={book.title} className="w-48 h-72 rounded-lg" />
+        <img
+          src={book.cover_image_url}
+          alt={book.title}
+          className="w-48 h-72 rounded-lg"
+        />
         <h1 className="text-center text-lg font-medium">{book.title}</h1>
         <div className="flex flex-col gap-2 items-center">
           <p className="text-[15px] font-extralight text-center">by</p>

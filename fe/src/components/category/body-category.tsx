@@ -1,5 +1,4 @@
 import type { Book } from "@/page/home";
-import Img1 from "@/assets/img1.jpg";
 import { Link } from "react-router";
 
 interface BodyCategoryProps {
@@ -8,7 +7,7 @@ interface BodyCategoryProps {
 
 export default function BodyCategory({ books }: BodyCategoryProps) {
   return (
-    <div className="flex bg-white justify-center rounded-[10px] px-3.5 py-3">
+    <div className="flex bg-white rounded-[10px] px-3.5 py-3">
       <div
         className={`flex flex-wrap overflow-x-auto pt-5 max-w-fit gap-5 rounded-[10px]`}
         style={{
@@ -23,7 +22,7 @@ export default function BodyCategory({ books }: BodyCategoryProps) {
               <div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105 w-[201px]">
                 <div className="w-[200px] h-[305px] rounded-lg">
                   <img
-                    src={Img1}
+                    src={book.cover_image_url}
                     alt={book.title}
                     className="w-full h-full rounded-lg"
                   />

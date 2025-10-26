@@ -1,4 +1,3 @@
-import Img1 from "@/assets/img1.jpg";
 import { getCategories } from "@/axios/api";
 import type { Book } from "@/page/home";
 import { useEffect, useState } from "react";
@@ -82,7 +81,7 @@ export default function CategorySection({
                   >
                     <div className="w-[200px] h-[305px] rounded-lg">
                       <img
-                        src={Img1}
+                        src={book.cover_image_url}
                         alt={book.title}
                         className="w-full h-full rounded-lg"
                       />
