@@ -7,16 +7,27 @@ use App\Models\Book;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use App\Repositories\BookRepository;
+
 
 class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    protected $bookRepository;
+
+    public function __construct(BookRepository $bookRepository)
+    {
+        $this->bookRepository = $bookRepository;
+    }
+
     public function index()
     {
-        try{
-            $books = Book::all();
+        try {
+            $books = $this->bookRepository->getAllBooks();
+
             return response()->json([
                 'success' => true,
                 'data' => $books,
@@ -35,7 +46,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'title' => 'required|string|max:255',
                 'author' => 'required|string|max:255',
@@ -50,7 +61,7 @@ class BookController extends Controller
                 'ratings' => 'nullable|integer|min:1|max:5',
             ]);
 
-            $book = Book::create($request->all());
+            $book = $this->bookRepository->createBook($request->all());
 
             return response()->json([
                 'success' => true,
@@ -72,7 +83,7 @@ class BookController extends Controller
     public function show(string $id)
     {
         try {
-            $book = Book::findOrFail($id);
+            $book = $this->bookRepository->getBookById($id);
             return response()->json([
                 'success' => true,
                 'data' => $book
@@ -98,8 +109,7 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $book = Book::findOrFail($id);
-            $book->update($request->all());
+            $book = $this->bookRepository->updateBook($id, $request->all());
 
             return response()->json([
                 'success' => true,
@@ -127,9 +137,7 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         try {
-            $book = Book::findOrFail($id);
-            $book->delete();
-
+            $this->bookRepository->deleteBook($id);
             return response()->json([
                 'success' => true,
                 'message' => 'Book deleted successfully'
