@@ -23,7 +23,7 @@ export default function ListBook() {
             description: detail.book.description,
           }))
         );
-
+        console.log(res.data, "daata");
         setBooks(formattedBooks);
       } catch (err) {
         console.error("Gagal mengambil data borrow:", err);
