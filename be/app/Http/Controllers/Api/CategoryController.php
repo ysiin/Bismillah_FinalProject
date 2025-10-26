@@ -14,7 +14,7 @@ use App\Repositories\CategoryRepository;
 /**
  * @OA\Tag(
  *     name="Category",
- *     description="API untuk mengelola kategori buku"
+ *     description="API for managing book categories"
  * )
  */
 
@@ -24,10 +24,15 @@ class CategoryController extends Controller
      * @OA\Get(
      *     path="/api/categories",
      *     tags={"Category"},
-     *   summary="List all categories",
+     *     summary="Get all categories",
+     *     description="Retrieve a list of all available categories",
      *     @OA\Response(
      *         response=200,
-     *         description="Successful"
+     *         description="List of categories retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to fetch categories"
      *     )
      * )
      */
@@ -60,6 +65,7 @@ class CategoryController extends Controller
      *     path="/api/categories",
      *     tags={"Category"},
      *     summary="Create a new category",
+     *     description="Add a new category to the system",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -70,6 +76,14 @@ class CategoryController extends Controller
      *     @OA\Response(
      *         response=201,
      *         description="Category created successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to create category"
      *     )
      * )
      */
@@ -96,9 +110,36 @@ class CategoryController extends Controller
         }
     }
 
+
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/categories/{id}",
+     *     tags={"Category"},
+     *     summary="Get category by ID",
+     *     description="Retrieve a specific category using its ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the category",
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Category retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Category not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to fetch category"
+     *     )
+     * )
      */
+
+
     public function show(string $id)
     {
         try {
@@ -120,9 +161,44 @@ class CategoryController extends Controller
             ], 500);
         }
     }
+
+
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/categories/{id}",
+     *     tags={"Category"},
+     *     summary="Update category by ID",
+     *     description="Update an existing category’s name or other properties",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the category",
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *             @OA\Property(property="name", type="string", example="Science Fiction")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Category updated successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Category not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to update category"
+     *     )
+     * )
      */
+
+
     public function update(Request $request, string $id)
     {
         try {
@@ -147,8 +223,34 @@ class CategoryController extends Controller
         }
     }
 
+
+
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/categories/{id}",
+     *     tags={"Category"},
+     *     summary="Delete category by ID",
+     *     description="Remove a category from the system using its ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the category to delete",
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Category deleted successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Category not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Failed to delete category"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {

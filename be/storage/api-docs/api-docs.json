@@ -7,21 +7,260 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000/api",
+            "url": "http://localhost:8000",
             "description": "Local API server"
         }
     ],
     "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get all books",
+                "operationId": "6a7bd788af0d0460170b7bb5bd020591",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Failed to fetch books"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create a new book",
+                "operationId": "72f82e1cd6f08112323f87053277ca99",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "isbn",
+                                    "category_id",
+                                    "total_copies",
+                                    "available_copies"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Belajar Laravel untuk Pemula"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Yaa Siin"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Panduan lengkap belajar Laravel"
+                                    },
+                                    "isbn": {
+                                        "type": "string",
+                                        "example": "9786020329585"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Gramedia"
+                                    },
+                                    "year_published": {
+                                        "type": "integer",
+                                        "example": 2024
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "total_copies": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "available_copies": {
+                                        "type": "integer",
+                                        "example": 8
+                                    },
+                                    "total_pages": {
+                                        "type": "integer",
+                                        "example": 250
+                                    },
+                                    "ratings": {
+                                        "type": "integer",
+                                        "example": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully"
+                    },
+                    "500": {
+                        "description": "Failed to create book"
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book by ID",
+                "operationId": "123856ec83e3466396b979a43eb1a15f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update book by ID",
+                "operationId": "2fc15aa806ac989f4d2b201b5952714d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laravel Advanced Guide"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Yaa Siin"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Update konten buku Laravel"
+                                    },
+                                    "isbn": {
+                                        "type": "string",
+                                        "example": "9786020329585"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Gramedia Pustaka Utama"
+                                    },
+                                    "year_published": {
+                                        "type": "integer",
+                                        "example": 2025
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "total_copies": {
+                                        "type": "integer",
+                                        "example": 12
+                                    },
+                                    "available_copies": {
+                                        "type": "integer",
+                                        "example": 9
+                                    },
+                                    "total_pages": {
+                                        "type": "integer",
+                                        "example": 280
+                                    },
+                                    "ratings": {
+                                        "type": "integer",
+                                        "example": 4
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Book updated successfully"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    },
+                    "500": {
+                        "description": "Failed to update book"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete book by ID",
+                "operationId": "eda12c526d0ccacaecea5f3d8f15d6df",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book deleted successfully"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    },
+                    "500": {
+                        "description": "Failed to delete book"
+                    }
+                }
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [
                     "Category"
                 ],
-                "summary": "List all categories",
+                "summary": "Get all categories",
+                "description": "Retrieve a list of all available categories",
                 "operationId": "ba73d9ad93a5aa2016de8de062fb1090",
                 "responses": {
                     "200": {
-                        "description": "Successful"
+                        "description": "List of categories retrieved successfully"
+                    },
+                    "500": {
+                        "description": "Failed to fetch categories"
                     }
                 }
             },
@@ -30,6 +269,7 @@
                     "Category"
                 ],
                 "summary": "Create a new category",
+                "description": "Add a new category to the system",
                 "operationId": "cca49a87d9b0ebb9a98ad7c154b71737",
                 "requestBody": {
                     "required": true,
@@ -53,6 +293,126 @@
                 "responses": {
                     "201": {
                         "description": "Category created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Failed to create category"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get category by ID",
+                "description": "Retrieve a specific category using its ID",
+                "operationId": "09767bb2e47dde77dd1e2591428b0ae1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    },
+                    "500": {
+                        "description": "Failed to fetch category"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Update category by ID",
+                "description": "Update an existing category’s name or other properties",
+                "operationId": "7dcf71887e585de7f881e9eb98d86126",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Science Fiction"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated successfully"
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    },
+                    "500": {
+                        "description": "Failed to update category"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Delete category by ID",
+                "description": "Remove a category from the system using its ID",
+                "operationId": "9b61b65823f4a21f182506b34ddf805c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the category to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted successfully"
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    },
+                    "500": {
+                        "description": "Failed to delete category"
                     }
                 }
             }
@@ -60,8 +420,12 @@
     },
     "tags": [
         {
+            "name": "Books",
+            "description": "API endpoints for managing books"
+        },
+        {
             "name": "Category",
-            "description": "API untuk mengelola kategori buku"
+            "description": "API for managing book categories"
         }
     ]
 }

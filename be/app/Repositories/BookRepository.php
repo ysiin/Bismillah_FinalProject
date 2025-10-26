@@ -5,14 +5,10 @@ namespace App\Repositories;
 use App\Models\Book;
 use Exception;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookRepository
 {
-    /**
-     * Fetch all books with their categories.
-     *
-     * @return array
-     */
     public function getAllBooks()
     {
         try {
@@ -38,7 +34,6 @@ class BookRepository
         }
     }
 
-
     public function getBookById($id)
     {
         try {
@@ -57,6 +52,8 @@ class BookRepository
                 'ratings' => $book->ratings,
                 'cover_image_url' => $book->cover_image_url,
             ];
+        } catch (ModelNotFoundException $e) {
+            throw $e;
         } catch (Exception $e) {
             throw new Exception('Failed to fetch book: ' . $e->getMessage());
         }
@@ -70,8 +67,7 @@ class BookRepository
                 $data['cover_image'] = $path;
             }
 
-            $book = Book::create($data);
-            return $book;
+            return Book::create($data);
         } catch (Exception $e) {
             throw new Exception('Failed to create book: ' . $e->getMessage());
         }
@@ -83,7 +79,6 @@ class BookRepository
             $book = Book::findOrFail($id);
 
             if (isset($data['cover_image']) && $data['cover_image']->isValid()) {
-
                 if ($book->cover_image && Storage::disk('public')->exists($book->cover_image)) {
                     Storage::disk('public')->delete($book->cover_image);
                 }
@@ -94,11 +89,12 @@ class BookRepository
 
             $book->update($data);
             return $book;
+        } catch (ModelNotFoundException $e) {
+            throw $e;
         } catch (Exception $e) {
             throw new Exception('Failed to update book: ' . $e->getMessage());
         }
     }
-
 
     public function deleteBook($id)
     {
@@ -111,6 +107,8 @@ class BookRepository
 
             $book->delete();
             return true;
+        } catch (ModelNotFoundException $e) {
+            throw $e;
         } catch (Exception $e) {
             throw new Exception('Failed to delete book: ' . $e->getMessage());
         }

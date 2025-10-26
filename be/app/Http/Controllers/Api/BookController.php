@@ -10,11 +10,27 @@ use Illuminate\Http\Request;
 use App\Repositories\BookRepository;
 
 
+
+/**
+ * @OA\Tag(
+ *     name="Books",
+ *     description="API endpoints for managing books"
+ * )
+ */
+
 class BookController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/books",
+     *     tags={"Books"},
+     *     summary="Get all books",
+     *     @OA\Response(response=200, description="Success"),
+     *     @OA\Response(response=500, description="Failed to fetch books")
+     * )
      */
+
 
     protected $bookRepository;
 
@@ -42,7 +58,30 @@ class BookController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/books",
+     *     tags={"Books"},
+     *     summary="Create a new book",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"title","author","isbn","category_id","total_copies","available_copies"},
+     *             @OA\Property(property="title", type="string", example="Belajar Laravel untuk Pemula"),
+     *             @OA\Property(property="author", type="string", example="Yaa Siin"),
+     *             @OA\Property(property="description", type="string", example="Panduan lengkap belajar Laravel"),
+     *             @OA\Property(property="isbn", type="string", example="9786020329585"),
+     *             @OA\Property(property="publisher", type="string", example="Gramedia"),
+     *             @OA\Property(property="year_published", type="integer", example=2024),
+     *             @OA\Property(property="category_id", type="integer", example=1),
+     *             @OA\Property(property="total_copies", type="integer", example=10),
+     *             @OA\Property(property="available_copies", type="integer", example=8),
+     *             @OA\Property(property="total_pages", type="integer", example=250),
+     *             @OA\Property(property="ratings", type="integer", example=5)
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Book created successfully"),
+     *     @OA\Response(response=500, description="Failed to create book")
+     * )
      */
     public function store(Request $request)
     {
@@ -79,7 +118,14 @@ class BookController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/books/{id}",
+     *     tags={"Books"},
+     *     summary="Get book by ID",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response=200, description="Success"),
+     *     @OA\Response(response=404, description="Book not found")
+     * )
      */
     public function show(string $id)
     {
@@ -93,7 +139,6 @@ class BookController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Book not found',
-                'error' => $e->getMessage()
             ], 404);
         } catch (Exception $e) {
             return response()->json([
@@ -105,7 +150,31 @@ class BookController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/books/{id}",
+     *     tags={"Books"},
+     *     summary="Update book by ID",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="title", type="string", example="Laravel Advanced Guide"),
+     *             @OA\Property(property="author", type="string", example="Yaa Siin"),
+     *             @OA\Property(property="description", type="string", example="Update konten buku Laravel"),
+     *             @OA\Property(property="isbn", type="string", example="9786020329585"),
+     *             @OA\Property(property="publisher", type="string", example="Gramedia Pustaka Utama"),
+     *             @OA\Property(property="year_published", type="integer", example=2025),
+     *             @OA\Property(property="category_id", type="integer", example=2),
+     *             @OA\Property(property="total_copies", type="integer", example=12),
+     *             @OA\Property(property="available_copies", type="integer", example=9),
+     *             @OA\Property(property="total_pages", type="integer", example=280),
+     *             @OA\Property(property="ratings", type="integer", example=4)
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Book updated successfully"),
+     *     @OA\Response(response=404, description="Book not found"),
+     *     @OA\Response(response=500, description="Failed to update book")
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -121,7 +190,6 @@ class BookController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Book not found',
-                'error' => $e->getMessage()
             ], 404);
         } catch (Exception $e) {
             return response()->json([
@@ -133,7 +201,15 @@ class BookController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/books/{id}",
+     *     tags={"Books"},
+     *     summary="Delete book by ID",
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response=200, description="Book deleted successfully"),
+     *     @OA\Response(response=404, description="Book not found"),
+     *     @OA\Response(response=500, description="Failed to delete book")
+     * )
      */
     public function destroy(string $id)
     {
@@ -147,7 +223,6 @@ class BookController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Book not found',
-                'error' => $e->getMessage()
             ], 404);
         } catch (Exception $e) {
             return response()->json([
