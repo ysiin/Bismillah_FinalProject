@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import Img1 from "@/assets/img1.jpg";
 import type { Book } from "@/page/home";
 import { Link } from "react-router";
 
@@ -62,7 +61,7 @@ export default function RecommendedSection({
                   >
                     <div className="w-[200px] h-[305px] rounded-lg">
                       <img
-                        src={Img1}
+                        src={book.cover_image_url}
                         alt={book.title}
                         className="w-full h-full rounded-lg"
                       />

@@ -16,6 +16,7 @@ export interface Book {
   total_copies: number;
   available_copies: number;
   total_pages: number;
+  cover_image_url: string;
   ratings: number;
 }
 
