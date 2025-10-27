@@ -23,6 +23,7 @@ Route::get('/categories/{id}', [CategoryController::class, 'show']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    Route::get('/borrows', [BorrowController::class, 'index']);
     Route::post('/borrows', [BorrowController::class, 'store']);
     Route::put('/borrows/{id}', [BorrowController::class, 'update']);
     Route::delete('/borrows/{id}', [BorrowController::class, 'destroy']);

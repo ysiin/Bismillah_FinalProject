@@ -1,4 +1,4 @@
-import { Bell } from "lucide-react";
+import Notification from "./notificationa/Notification";
 import ProfileDropdown from "./profile-dropdown";
 import SearchBar from "./home/search-bar";
 import { useLocation } from "react-router";
@@ -24,7 +24,7 @@ export default function HeaderSection({
       ) : null}
 
       <div className="flex items-center gap-5">
-        <Bell />
+        <Notification/>
         <ProfileDropdown />
       </div>
     </div>
