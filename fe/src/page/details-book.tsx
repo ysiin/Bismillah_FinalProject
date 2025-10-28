@@ -1,4 +1,3 @@
-import Img1 from "@/assets/img1.jpg";
 import { borrowBook, getCategories, getDetailsBooks } from "@/axios/api";
 import HeaderSection from "@/components/header-section";
 import type { Book } from "@/page/home";
@@ -96,7 +95,7 @@ export default function DetailBookPage() {
           <div className="flex gap-2">
             <div className="w-72 h-96">
               <img
-                src={Img1}
+                src={book.cover_image_url}
                 alt={book.title}
                 className="w-full h-full rounded-lg"
               />
