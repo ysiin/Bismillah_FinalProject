@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/borrows', [BorrowController::class, 'store']);
     Route::put('/borrows/{id}', [BorrowController::class, 'update']);
     Route::delete('/borrows/{id}', [BorrowController::class, 'destroy']);
-
+    Route::get('/borrows', [BorrowController::class, 'index']);
 
 
     //admin only
