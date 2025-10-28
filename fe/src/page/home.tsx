@@ -12,7 +12,7 @@ export interface Book {
   isbn: string;
   publisher: string;
   year_published: number;
-  category_id: number;
+  category: string;
   total_copies: number;
   available_copies: number;
   total_pages: number;
