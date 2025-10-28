@@ -1,16 +1,6 @@
+import type { Book } from "@/page/home"
 import BookCover from "../ui/bookCover"
 
-interface Book {
-  id: number
-  title: string
-  author: string
-  year_published: number
-  rating: number
-  category: string
-  description: string
-  due_date: string
-  returned_at: string | null
-}
 
 export default function BookCard({ book }: { book: Book }) {
   const formatDate = (dateStr: string) => {
@@ -28,7 +18,7 @@ export default function BookCard({ book }: { book: Book }) {
 
   return (
     <div className="bg-white border flex p-2 rounded-xl">
-      <BookCover />
+      <BookCover bookUrl={book.cover_image_url} />
 
       <div id="book-details" className="flex flex-col m-2 w-full">
         <div id="main-detail" className="flex justify-between items-center">
@@ -38,7 +28,7 @@ export default function BookCard({ book }: { book: Book }) {
           </div>
           <div className="flex gap-4">
             <p className="border rounded-md px-2 bg-accent-50 text-white font-semibold">
-              ⭐{book.rating}
+              ⭐{book.ratings}
             </p>
             <p className="border rounded-md px-2 bg-accent-50 text-white font-semibold">
               {book.year_published}
