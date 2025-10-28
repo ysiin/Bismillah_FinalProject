@@ -18,12 +18,12 @@ export default function ListBook() {
             author: detail.book.author,
             year_published: detail.book.year_published,
             isbn: detail.book.isbn,
-            rating: detail.book.ratings,
+            ratings: detail.book.ratings,
             category: detail.book.category.name ?? "Tanpa Kategori",
             description: detail.book.description,
             due_date: detail.due_date,
             returned_at: detail.returned_at,
-            cover_image: detail.book.cover_image,
+            cover_image_url: detail.book.cover_image,
           }))
         );
         console.log(res.data, "daata");

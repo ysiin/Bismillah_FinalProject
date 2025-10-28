@@ -9,6 +9,7 @@ export interface Book {
   title: string;
   author: string;
   description: string;
+  category: string;
   isbn: string;
   publisher: string;
   year_published: number;
@@ -18,6 +19,8 @@ export interface Book {
   total_pages: number;
   cover_image_url: string;
   ratings: number;
+  returned_at: string;
+  due_date: string;
 }
 
 export default function Home() {
