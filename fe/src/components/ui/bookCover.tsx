@@ -1,9 +1,9 @@
-import bookImg from "@/assets/img2.jpg"
 
-export default function BookCover(){
+
+export default function BookCover({ bookUrl} : {bookUrl : string}){
     return(
         <>
-        <img src={bookImg} 
+        <img src={bookUrl} 
             alt="cover" 
             className="w-36 h-50 object-contain"/>
         </>

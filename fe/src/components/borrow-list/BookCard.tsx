@@ -10,6 +10,7 @@ interface Book {
   description: string
   due_date: string
   returned_at: string | null
+  cover_image: string
 }
 
 export default function BookCard({ book }: { book: Book }) {
@@ -28,7 +29,7 @@ export default function BookCard({ book }: { book: Book }) {
 
   return (
     <div className="bg-white border flex p-2 rounded-xl">
-      <BookCover />
+      <BookCover bookUrl={book.cover_image} />
 
       <div id="book-details" className="flex flex-col m-2 w-full">
         <div id="main-detail" className="flex justify-between items-center">
