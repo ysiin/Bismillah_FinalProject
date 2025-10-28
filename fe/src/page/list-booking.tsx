@@ -23,7 +23,7 @@ export default function ListBook() {
             description: detail.book.description,
             due_date: detail.due_date,
             returned_at: detail.returned_at,
-            cover_image_url: detail.book.cover_image,
+            cover_image_url: detail.book.cover_image_url,
           }))
         );
         console.log(res.data, "daata");
