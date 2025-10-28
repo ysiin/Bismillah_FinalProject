@@ -33,27 +33,23 @@ export default function Category() {
     };
     fetchData();
   }, []);
-  const categoryMap = useMemo(() => {
-    return categories.reduce((map, category) => {
-      map[category.id] = category.name;
-      return map;
-    }, {} as Record<number, string>);
-  }, [categories]);
 
   const filteredBooks = useMemo(() => {
     let tempBooks = [...books];
 
+    // 🔍 filter berdasarkan pencarian (title, author, publisher, category)
     if (searchQuery) {
       tempBooks = tempBooks.filter((book) => {
-        const categoryName = categoryMap[book.category_id] || "";
         return (
-          categoryName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          book.publisher.toLowerCase().includes(searchQuery.toLowerCase())
+          book.category?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.author?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.publisher?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.title?.toLowerCase().includes(searchQuery.toLowerCase())
         );
       });
     }
 
+    // 🎯 filter tambahan kalau user klik tombol "Filter"
     if (isFilterApplied) {
       if (selectedYears) {
         tempBooks = tempBooks.filter(
@@ -61,14 +57,10 @@ export default function Category() {
         );
       }
       if (selectedCategoryName) {
-        const categoryId = categories.find(
-          (c) => c.name === selectedCategoryName
-        )?.id;
-        if (categoryId) {
-          tempBooks = tempBooks.filter(
-            (book) => book.category_id === categoryId
-          );
-        }
+        tempBooks = tempBooks.filter(
+          (book) =>
+            book.category?.toLowerCase() === selectedCategoryName.toLowerCase()
+        );
       }
     }
 
@@ -79,8 +71,6 @@ export default function Category() {
     selectedYears,
     selectedCategoryName,
     isFilterApplied,
-    categories,
-    categoryMap,
   ]);
 
   const handleFilterClick = () => {
